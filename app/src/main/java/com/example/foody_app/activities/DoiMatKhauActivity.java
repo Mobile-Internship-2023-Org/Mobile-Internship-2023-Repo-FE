@@ -54,7 +54,6 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         }
     }
 
-
     private void initView() {
         edt_current_password = findViewById(R.id.edt_current_password);
         edt_new_password = findViewById(R.id.edt_new_password);
