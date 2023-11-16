@@ -9,18 +9,10 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
     tools:context=".fragments.GioHangFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Giỏ Hàng"
-        android:textStyle="bold"
-        android:textSize="26dp"
-        android:layout_marginLeft="125dp"/>
 
     <ListView
         android:id="@+id/listViewCart"
         android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
         android:layout_height="400dp"
         android:dividerHeight="0.5dp"
         android:layout_marginBottom="8dp"/>
@@ -31,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/listViewCart"
         android:layout_marginTop="8dp"
-        android:padding="8dp" />
+        android:padding="8dp"
+        />
 
     <EditText
         android:id="@+id/etDiscountCode"
@@ -47,15 +40,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/etDiscountCode"
         android:layout_marginTop="8dp"
-        android:text="Nhập mã giảm giá"/>
+        android:text="Apply Discount"/>
 
     <Button
         android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:textSize="20dp"
-        android:text="Xác nhận"
+        android:text="Checkout"
         android:textColor="#ffffff"
         android:padding="16dp"/>
 </RelativeLayout>
