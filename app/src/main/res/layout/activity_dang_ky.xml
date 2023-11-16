@@ -1,9 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DangKyActivity">
+    android:orientation="vertical"
+    tools:context=".activities.DangKyActivity"
+    android:background="@drawable/back_register"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:layout_margin="30dp"
+            android:text="FOODY!"
+            android:textColor="@color/black"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="95dp"
+            android:src="@drawable/xinchao" />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+
+            android:src="@drawable/facebook" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/google" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/instagram" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/tiktok" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or continue with"
+        android:layout_marginLeft="150dp"
+        android:textColor="@color/black"
+        />
+
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Username" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Email" />
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Password"/>
+    <EditText
+        android:id="@+id/edtRePassword"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Re-Password"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:text="Create an account ->"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:background="@drawable/btn_login"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/txtSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="SIGN IN "
+            android:textColor="#EE5050" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         //ẩn item giỏ hàng hoặc thông kê theo từng role
 //        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
 //        mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
+        //thsmh text
 
         ReplaceFragment(new DanhSachMonAnFragment());
 
