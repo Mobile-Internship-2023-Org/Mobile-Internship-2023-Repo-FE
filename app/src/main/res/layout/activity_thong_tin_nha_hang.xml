@@ -12,13 +12,15 @@
         android:layout_height="wrap_content"
         >
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/backphap"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin khách hàng"
+            android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
@@ -50,99 +52,132 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/shop"
-            android:layout_marginStart="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="Products:"
-            android:textSize="18dp"
-            />
-        <TextView
+            android:layout_marginTop="23dp"
+            android:orientation="horizontal">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="123"
-            android:layout_weight="1"
-            android:textColor="@color/pink"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center"
-            />
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/shop" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Products:"
+                android:textSize="18dp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:text="123"
+                android:textColor="@color/pink" />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#CCCCCC"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/facebook1"
-            android:layout_marginStart="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fanpage:"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            >
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/facebook1"
+                android:layout_marginStart="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fanpage:"
+                android:textSize="18dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                />
 
-        <TextView
-            android:id="@+id/tvFanpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="https:/www.facebook.comlocale=vi_VN"
+            <TextView
+                android:id="@+id/tvFanpage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:text="https:/www.facebook.comlocale=vi_VN"
+                android:textColor="@color/pink"
+                />
 
-            android:textColor="@color/pink"
-
-            />
-
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#CCCCCC"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/address"
-            android:layout_marginStart="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="Address:"
-            android:textSize="18dp"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
 
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="262dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:text="Đà nẵng"
-            android:textColor="@color/pink" />
+            >
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/address"
+                android:layout_marginStart="16dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Address:"
+                android:textSize="18dp"
+                />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:text="Đà nẵng"
+                android:textColor="@color/pink" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#CCCCCC"/>
     </LinearLayout>
+
 
 </LinearLayout>
