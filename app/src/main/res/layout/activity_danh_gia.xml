@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".activities.DanhGiaActivity">
 
+    <ImageView
+        android:layout_width="408dp"
+        android:layout_height="291dp"
+        android:src="@mipmap/stars"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </ImageView>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        >
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnGuidanhgia"
+        android:layout_width="266dp"
+        android:layout_height="51dp"
+        android:text="Gửi đánh giá"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="629dp" />
+
+    <TextView
+        android:layout_width="398dp"
+        android:layout_height="158dp"
+        android:text="Nhận xét:"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="371dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
