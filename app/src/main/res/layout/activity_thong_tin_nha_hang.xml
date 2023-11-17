@@ -145,7 +145,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
-
             >
             <ImageView
                 android:layout_width="42dp"
@@ -162,14 +161,15 @@
                 android:textSize="18dp"
                 />
 
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="262dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:text="Đà nẵng"
-                android:textColor="@color/pink" />
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:text="Đà nẵng"
+            android:textColor="@color/pink" />
 
         </LinearLayout>
         <View
