@@ -11,9 +11,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.ChiTietHoaDonActivity;
+import com.example.foody_app.activities.ChiTietMonAnActivity;
+import com.example.foody_app.activities.DanhGiaActivity;
 import com.example.foody_app.activities.ThemMonAnActivity;
 import com.example.foody_app.activities.TimKiemActivity;
 import com.example.foody_app.adapter.FoodAdapter;
@@ -77,7 +81,14 @@ public class DanhSachMonAnFragment extends Fragment {
         cardViewSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), TimKiemActivity.class);
+                Intent intent = new Intent(getContext(), DanhGiaActivity.class);
+                startActivity(intent);
+            }
+        });
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(requireContext(), ChiTietMonAnActivity.class);
                 startActivity(intent);
             }
         });
