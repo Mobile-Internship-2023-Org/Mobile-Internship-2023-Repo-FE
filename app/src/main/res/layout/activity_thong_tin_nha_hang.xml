@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         >
         <ImageView
-
+            android:id="@+id/myBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/backphap"/>
