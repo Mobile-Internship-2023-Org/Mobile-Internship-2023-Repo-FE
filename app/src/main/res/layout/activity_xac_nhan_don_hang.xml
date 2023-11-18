@@ -27,9 +27,9 @@
                 android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xác nhận đơn hàng"
                 android:layout_gravity="center"
-                android:textSize="24sp"
+                android:text="Xác nhận đơn hàng"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -410,18 +410,14 @@
 
     <Button
         android:id="@+id/confirmOrderBtn"
+        style="@style/CustomButtonText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:padding="10dp"
-        android:backgroundTint="@color/pink"
         android:text="Đặt đơn - 175,000đ"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
