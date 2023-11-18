@@ -18,6 +18,10 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_nha_hang);
+        initView();
+        setOnclickToolbar();
+    }
+    private void initView(){
         myBack = (ImageView) findViewById(R.id.myBack);
         imgShop = (ImageView) findViewById(R.id.imgShop);
         tvName = (TextView) findViewById(R.id.tvName);
@@ -25,6 +29,8 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
         tvProduct = (TextView)  findViewById(R.id.tvProduct);
         tvFanpage = (TextView)  findViewById(R.id.tvFanpage);
         tvAddress = (TextView)  findViewById(R.id.tvAddress);
+    }
+    private void setOnclickToolbar(){
         myBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
