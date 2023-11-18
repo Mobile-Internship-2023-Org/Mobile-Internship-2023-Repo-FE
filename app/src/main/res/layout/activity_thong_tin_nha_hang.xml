@@ -10,6 +10,8 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/myBackToolbar"
+
         >
         <ImageView
             android:id="@+id/myBack"
@@ -17,6 +19,7 @@
             android:layout_height="32dp"
             android:src="@drawable/backphap"/>
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin khách hàng"
@@ -75,7 +78,7 @@
                 android:textSize="18dp" />
 
             <TextView
-
+                android:id="@+id/tvProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
