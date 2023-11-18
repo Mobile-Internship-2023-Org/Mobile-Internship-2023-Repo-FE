@@ -11,13 +11,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.activities.XacNhanDonHangActivity;
+import com.example.foody_app.adapter.GioHangAdapter;
+import com.example.foody_app.models.FoodModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GioHangFragment extends Fragment {
 
-    private Button btnCheckOut;
+
+    private GioHangAdapter mGioHangAdapter;
+    private List<FoodModel> mFoodModels;
+    private ListView mListView;
+    private Button btnDatHang;
 
     public GioHangFragment() {
         // Required empty public constructor
@@ -40,9 +50,20 @@ public class GioHangFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnCheckOut = view.findViewById(R.id.btnCheckout);
+        mListView = view.findViewById(R.id.listViewCart);
+        btnDatHang = view.findViewById(R.id.btnDatHang);
+        mFoodModels = new ArrayList<>();
+        for (int i = 0 ; i < 2 ; i++){
+            FoodModel foodModel = new FoodModel();
+            foodModel.setIdMonAn(i);
+            foodModel.setTen("Xúc xích");
+            foodModel.setGiaBan(40000);
+            mFoodModels.add(foodModel);
+        }
+        mGioHangAdapter = new GioHangAdapter(getContext(), mFoodModels);
+        mListView.setAdapter(mGioHangAdapter);
 
-        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+        btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), XacNhanDonHangActivity.class);
