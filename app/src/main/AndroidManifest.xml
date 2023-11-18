@@ -29,7 +29,7 @@
             android:exported="true" />
         <activity
             android:name=".activities.DoiThongTinTKActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.DoiMatKhauActivity"
             android:exported="false" />
