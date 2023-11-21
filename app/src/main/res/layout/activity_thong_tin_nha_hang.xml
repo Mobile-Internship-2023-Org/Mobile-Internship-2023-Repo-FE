@@ -22,7 +22,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông tin khách hàng"
+            android:text="Thông tin nhà hàng"
             android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"/>
@@ -35,16 +35,17 @@
         android:src="@drawable/default_image"
         android:layout_gravity="center"
         />
-    <TextView
+
+    <EditText
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="Name shop"
         android:textSize="24dp"
-        android:layout_marginStart="16dp"
-        />
+        android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/tvPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,9 +76,10 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:text="Products:"
+                android:textStyle="bold"
                 android:textSize="18dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,6 +87,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:text="123"
+                android:textSize="12dp"
                 android:textColor="@color/pink" />
 
 
@@ -115,18 +118,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fanpage:"
+                android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvFanpage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
+                android:textSize="12dp"
                 android:text="https:/www.facebook.comlocale=vi_VN"
                 android:textColor="@color/pink"
                 />
@@ -161,10 +166,10 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:text="Address:"
-                android:textSize="18dp"
-                />
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tvAddress"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
@@ -172,6 +177,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             android:text="Đà nẵng"
+            android:textSize="12dp"
             android:textColor="@color/pink" />
 
         </LinearLayout>
