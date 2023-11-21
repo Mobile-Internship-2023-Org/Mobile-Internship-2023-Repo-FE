@@ -12,5 +12,6 @@ public class XacNhanDonHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xac_nhan_don_hang);
+
     }
 }

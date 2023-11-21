@@ -1,14 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TaiKhoanFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.TaiKhoanFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nguyễn Văn A"
+        android:textSize="18dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvInfoRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/pink"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin nhà hàng"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="10dp"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvChangeInfoUser"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/pink"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đổi thông tin"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="10dp"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/pink"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đổi mật khẩu"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="10dp"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/pink"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng suất"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="10dp"/>
+    </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+</LinearLayout>
