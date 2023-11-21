@@ -28,12 +28,12 @@
         />
 
     <EditText
-        android:id="@+id/edtUser"
+        android:id="@+id/edtEmail"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
-        android:hint="Username"
+        android:hint="Email"
         />
 
     <EditText
