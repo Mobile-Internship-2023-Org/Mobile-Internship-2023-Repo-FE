@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,17 @@ import com.example.foody_app.activities.ThemMonAnActivity;
 import com.example.foody_app.activities.TimKiemActivity;
 import com.example.foody_app.adapter.FoodAdapter;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.utils.APIClient;
+import com.example.foody_app.utils.APIInterface;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DanhSachMonAnFragment extends Fragment {
 
@@ -61,14 +69,8 @@ public class DanhSachMonAnFragment extends Fragment {
         onBindView(view);
 
         mFoodModels = new ArrayList<>();
-        for (int i = 0 ; i < 6 ; i++){
-            FoodModel foodModel = new FoodModel();
-            foodModel.setIdMonAn(i);
-            foodModel.setTen("Hamburger");
-            foodModel.setGiaBan(40000);
-            mFoodModels.add(foodModel);
-        }
         mAdapter = new FoodAdapter(getContext(),mFoodModels);
+        getAllFood();
         mGridView.setAdapter(mAdapter);
 
         fabAddFood.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +80,13 @@ public class DanhSachMonAnFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        /**
+         *sự kiện click tìm chuyển màn hình tìm kiếm món ăn
+         */
         cardViewSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DanhGiaActivity.class);
+                Intent intent = new Intent(getContext(), TimKiemActivity.class);
                 startActivity(intent);
             }
         });
@@ -89,14 +94,45 @@ public class DanhSachMonAnFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(requireContext(), ChiTietMonAnActivity.class);
+                intent.putExtra("idFood",mAdapter.getItemId(i));
+                intent.putExtra("idType",mFoodModels.get(i).getIdTheLoai());
                 startActivity(intent);
             }
         });
     }
 
+    /**
+     *
+     * ánh xạ view
+     */
     private void onBindView(View view){
         fabAddFood = view.findViewById(R.id.fabAddFood);
         cardViewSearch = view.findViewById(R.id.cardViewSearch);
         mGridView = view.findViewById(R.id.grid_ds);
+    }
+
+    /**
+     * function lấy dữ liệu món ăn
+     */
+    private void getAllFood(){
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<List<FoodModel>> call = apiInterface.getAllFood();
+        call.enqueue(new Callback<List<FoodModel>>() {
+            @Override
+            public void onResponse(Call<List<FoodModel>> call, Response<List<FoodModel>> response) {
+                if(response.isSuccessful()){
+                    mFoodModels.clear();
+                    mFoodModels.addAll(response.body());
+                    mAdapter.notifyDataSetChanged();
+                }else{
+                    Log.e("TAG", "onResponse error: "+response.errorBody() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FoodModel>> call, Throwable t) {
+                Log.e("TAG", "onFailure: "+t.getMessage());
+            }
+        });
     }
 }
