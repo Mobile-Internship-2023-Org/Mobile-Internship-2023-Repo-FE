@@ -25,6 +25,7 @@ public interface APIInterface {
     Call<FoodModel> getFoodById(@Path("foodId") String id);
 
 
+
     @POST("/login")
     Call<LoginRegisterModel> loginModelCall(@Body LoginRegisterModel loginRegisterModel);
 

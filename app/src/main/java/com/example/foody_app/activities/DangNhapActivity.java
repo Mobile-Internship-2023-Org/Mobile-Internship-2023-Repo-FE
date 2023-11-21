@@ -2,7 +2,9 @@ package com.example.foody_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,9 @@ public class DangNhapActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         btnLogin = findViewById(R.id.btnLogin);
 
+        //đọc email
+        edtEmail.setText(readEmailLocally());
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +52,6 @@ public class DangNhapActivity extends AppCompatActivity {
                 loginUser();
             }
         });
-
-
 
 
         txtSignUp.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +104,7 @@ public class DangNhapActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish(); // Đóng màn hình hiện tại nếu bạn không muốn quay lại màn hình đăng nhập
                     Toast.makeText(DangNhapActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    saveEmailLocally(email);
                 }else {
                     // Xử lý khi response không thành công
                     Toast.makeText(DangNhapActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
@@ -114,5 +118,18 @@ public class DangNhapActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void saveEmailLocally(String email) {
+        // Use SharedPreferences to save the email locally
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.apply();
+    }
+    private String readEmailLocally() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("email", "");
+    }
+
 
 }
