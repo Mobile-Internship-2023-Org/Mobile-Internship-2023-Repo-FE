@@ -41,7 +41,7 @@ public class DangNhapActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
 
         //đọc email
-        edtEmail.setText(readEmailLocally());
+        edtEmail.setText(readEmailLocally(this));
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +109,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     // Xử lý khi response không thành công
                     Toast.makeText(DangNhapActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -126,8 +125,8 @@ public class DangNhapActivity extends AppCompatActivity {
         editor.putString("email", email);
         editor.apply();
     }
-    private String readEmailLocally() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+    public String readEmailLocally(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("email", "");
     }
 
