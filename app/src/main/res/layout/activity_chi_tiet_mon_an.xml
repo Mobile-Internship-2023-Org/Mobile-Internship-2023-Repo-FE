@@ -153,12 +153,14 @@
             android:background="@drawable/custom_button"
             android:layout_marginHorizontal="10dp">
             <ImageView
+                android:id="@+id/imgMinus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/minus"
                 android:layout_marginEnd="5dp"
                 />
             <TextView
+                android:id="@+id/tvSoLuongCT"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -166,12 +168,14 @@
                 android:gravity="center"
                 android:layout_gravity="center"/>
             <ImageView
+                android:id="@+id/imgPlus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/plus1"
                 android:layout_marginStart="5dp"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/tvGia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="60000đ"
@@ -190,6 +194,7 @@
             android:layout_gravity="center"
             android:gravity="center">
             <LinearLayout
+                android:id="@+id/layout_cart"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:gravity="center"

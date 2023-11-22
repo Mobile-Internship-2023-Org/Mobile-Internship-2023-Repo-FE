@@ -2,15 +2,18 @@ package com.example.foody_app.activities;
 
 import static androidx.core.content.ContentProviderCompat.requireContext;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.foody_app.R;
@@ -32,8 +35,12 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     private FoodAdapter2 mAdapter2;
     private RecyclerView mRecyclerView;
     private ImageView imgEdit;
-    private TextView tvTen, tvGia;
+    private TextView tvTen, tvGiaBan, tvSoLuong, tvGia;
+    private ImageView imgMinus, imgPlus;
+    private FoodModel model;
+    private LinearLayout mLayout;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +48,37 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
 
         onBindView();
 
-        Long id = getIntent().getLongExtra("idFood", -1);
-        if(id != null){
-            getFoodById(Long.toString(id));
-        }
+        long id = getIntent().getLongExtra("idFood", -1);
+        Integer type = getIntent().getIntExtra("idType",-1);
+        tvSoLuong.setText(1+"");
+        /**
+         * xử lý sự kiện click image (-)
+         */
+        imgMinus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                tvSoLuong.setText((Integer.parseInt(tvSoLuong.getText().toString()) - 1)+"");
+                if(Integer.parseInt(tvSoLuong.getText().toString()) < 1){
+                    tvSoLuong.setText(1+"");
+                }
+                tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+            }
+        });
+        /**
+         * xử lý sự kiện click image (+)
+         */
+        imgPlus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                tvSoLuong.setText((Integer.parseInt(tvSoLuong.getText().toString()) + 1)+"");
+                tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+            }
+        });
         mFoodModels = new ArrayList<>();
+        getFoodById(Long.toString(id));
+        getFoodByType(type, (int) id);
         mAdapter2 = new FoodAdapter2(mFoodModels);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(ChiTietMonAnActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -69,19 +102,31 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.rcvCTMA);
         imgEdit = findViewById(R.id.imgEdit);
         tvTen = findViewById(R.id.tvTenMonAnCT);
-        tvGia = findViewById(R.id.tvGiaMonAnCT);
+        tvGiaBan = findViewById(R.id.tvGiaMonAnCT);
+        tvSoLuong = findViewById(R.id.tvSoLuongCT);
+        imgMinus = findViewById(R.id.imgMinus);
+        imgPlus = findViewById(R.id.imgPlus);
+        tvGia = findViewById(R.id.tvGia);
+        mLayout = findViewById(R.id.layout_cart);
     }
 
+    /**
+     *
+     * function laays thoong tin mons awn theo id
+     */
     private void getFoodById(String id){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<FoodModel> call = apiInterface.getFoodById(id);
         call.enqueue(new Callback<FoodModel>() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<FoodModel> call, Response<FoodModel> response) {
+            public void onResponse(@NonNull Call<FoodModel> call, @NonNull Response<FoodModel> response) {
                 if(response.isSuccessful()){
-                    FoodModel model = response.body();
+                    model = response.body();
+                    assert model != null;
                     tvTen.setText(model.getTen());
-                    tvGia.setText(model.getGiaBan()+"đ/suất");
+                    tvGiaBan.setText(model.getGiaBan()+"đ/suất");
+                    tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
 
                 }else {
                     Log.e("TAG", "onResponse: "+response.errorBody() );
@@ -89,9 +134,35 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<FoodModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<FoodModel> call, @NonNull Throwable t) {
                 Log.e("TAG", "onFailure: "+t.getMessage());
             }
         });
     }
+
+    private void getFoodByType(Integer type, Integer id){
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<List<FoodModel>> call = apiInterface.getFoodByType(type, id);
+
+        call.enqueue(new Callback<List<FoodModel>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onResponse(@NonNull Call<List<FoodModel>> call, @NonNull Response<List<FoodModel>> response) {
+                if(response.isSuccessful()){
+                    mFoodModels.clear();
+                    assert response.body() != null;
+                    mFoodModels.addAll(response.body());
+                    mAdapter2.notifyDataSetChanged();
+                }else{
+                    Log.e("TAG", "onResponse: "+response.errorBody() );
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<FoodModel>> call, @NonNull Throwable t) {
+                Log.e("TAG", "onFailure: "+t.getMessage() );
+            }
+        });
+    }
+
 }
