@@ -1,6 +1,9 @@
 package com.example.foody_app.utils;
 
+import com.example.foody_app.adapter.GioHangAdapter;
+import com.example.foody_app.fragments.GioHangFragment;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.InforModel;
 import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.models.LoginRegisterModel;
 
@@ -31,6 +34,9 @@ public interface APIInterface {
 
     @POST("/register")
     Call<LoginRegisterModel> loginRegisterModelCall (@Body LoginRegisterModel loginRegisterModel);
+
+    @GET("/getInfor")
+    Call<List<InforModel>> getInfor();
 
 
 
