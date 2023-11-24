@@ -75,12 +75,12 @@
         />
 
 
-    <EditText
-        android:id="@+id/edtUsername"
-        android:layout_width="365dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:hint="Username" />
+<!--    <EditText-->
+<!--        android:id="@+id/edtUsername"-->
+<!--        android:layout_width="365dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:hint="Username" />-->
 
     <EditText
         android:id="@+id/edtEmail"
