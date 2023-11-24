@@ -102,7 +102,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     // Chuyển sang màn hình chính (MainActivity)
                     Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish(); // Đóng màn hình hiện tại nếu bạn không muốn quay lại màn hình đăng nhập
                     Toast.makeText(DangNhapActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     saveEmailLocally(email);
                 }else {

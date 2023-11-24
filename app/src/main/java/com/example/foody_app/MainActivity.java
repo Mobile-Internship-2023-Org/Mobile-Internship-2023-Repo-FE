@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if (response.isSuccessful()) {
                     UserModel userModel = response.body();
-                    Log.e("", "onResponse: "+userModel.getHoten() );
+                    Log.e("", "onResponse: "+userModel.getHoTen() );
                     if(userModel.getRole().equals("admin")){
                         mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
                     }else{
