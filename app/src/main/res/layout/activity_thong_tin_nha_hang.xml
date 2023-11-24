@@ -88,7 +88,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
-                android:hint="https:/www.facebook/..."
+                android:hint="https:/www.facebook.comlocale=vi_VN"
                 android:textColor="@color/pink"
                 android:textSize="12dp" />
 
