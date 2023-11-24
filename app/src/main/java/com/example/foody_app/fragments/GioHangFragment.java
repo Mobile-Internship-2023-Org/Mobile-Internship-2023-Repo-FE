@@ -7,25 +7,38 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.FileUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.activities.XacNhanDonHangActivity;
+import com.example.foody_app.adapter.FoodAdapter;
 import com.example.foody_app.adapter.GioHangAdapter;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.InforModel;
+import com.example.foody_app.utils.APIClient;
+import com.example.foody_app.utils.APIInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class GioHangFragment extends Fragment {
 
+    private TextView txtTongTien;
+    private FoodAdapter mAdapter;
 
     private GioHangAdapter mGioHangAdapter;
-    private List<FoodModel> mFoodModels;
+    private List<InforModel> mInforModel;
     private ListView mListView;
     private Button btnDatHang;
 
@@ -37,7 +50,9 @@ public class GioHangFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,18 +64,15 @@ public class GioHangFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
-        mFoodModels = new ArrayList<>();
-        for (int i = 0 ; i < 2 ; i++){
-            FoodModel foodModel = new FoodModel();
-            foodModel.setIdMonAn(i);
-            foodModel.setTen("Xúc xích");
-            foodModel.setGiaBan(40000);
-            mFoodModels.add(foodModel);
-        }
-        mGioHangAdapter = new GioHangAdapter(getContext(), mFoodModels);
+        mInforModel = new ArrayList<>();
+        getInfor();
+        mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
+
+
+
+        mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
         mListView.setAdapter(mGioHangAdapter);
 
         btnDatHang.setOnClickListener(new View.OnClickListener() {
@@ -71,4 +83,28 @@ public class GioHangFragment extends Fragment {
             }
         });
     }
-}
+    private void getInfor(){
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<List<InforModel>> call = apiInterface.getInfor();
+        call.enqueue(new Callback<List<InforModel>>() {
+            @Override
+            public void onResponse(Call<List<InforModel>> call, Response<List<InforModel>> response) {
+                if(response.isSuccessful()){
+                    Log.e("TAG", "onResponse: "+response.body());
+                    mInforModel.clear();
+                    mInforModel.addAll(response.body());
+                    mGioHangAdapter.notifyDataSetChanged();
+                }else{
+                    Log.e("TAG", "onResponse error: "+response.errorBody() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<InforModel>> call, Throwable t) {
+                Log.e("TAG", "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
+
+    }
