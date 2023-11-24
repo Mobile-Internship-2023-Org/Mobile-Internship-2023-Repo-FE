@@ -1,5 +1,6 @@
 package com.example.foody_app.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -146,13 +147,18 @@ public class DanhSachMonAnFragment extends Fragment {
     }
     private void getUserData(String email){
         UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if(response.isSuccessful()){
                     UserModel userModel = response.body();
-                    Log.e("TAG", "onResponse: "+userModel.getHoten());
-                    if(response.body().getHoten() != null){
-                        tvNguoiDung.setText(response.body().getHoten());
+                    assert userModel != null;
+                    Log.e("TAG", "onResponse: "+userModel.getHoTen());
+                    if(response.body().getHoTen() != null){
+                        tvNguoiDung.setText("Hi "+response.body().getHoTen());
+                    }
+                    if(userModel.getRole().equals("user")){
+                        fabAddFood.setVisibility(View.GONE);
                     }
                 }else{
 

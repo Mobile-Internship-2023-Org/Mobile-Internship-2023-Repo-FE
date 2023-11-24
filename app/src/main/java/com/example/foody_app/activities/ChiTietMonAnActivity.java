@@ -15,12 +15,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foody_app.R;
 import com.example.foody_app.adapter.FoodAdapter2;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.ShoppingCartModel;
+import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
+import com.example.foody_app.utils.UserModelHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     private ImageView imgMinus, imgPlus;
     private FoodModel model;
     private LinearLayout mLayout;
+    private ShoppingCartModel mShoppingCartModel = new ShoppingCartModel();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -48,7 +53,10 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
 
         onBindView();
 
+        DangNhapActivity activity = new DangNhapActivity();
+        getUserData(activity.readEmailLocally(ChiTietMonAnActivity.this));
         long id = getIntent().getLongExtra("idFood", -1);
+        mShoppingCartModel.setIdMonAn(Long.valueOf(id).intValue());
         Integer type = getIntent().getIntExtra("idType",-1);
         tvSoLuong.setText(1+"");
         /**
@@ -90,6 +98,15 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ChiTietMonAnActivity.this, SuaMonAnActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mShoppingCartModel.setSoLuong(Integer.parseInt(tvSoLuong.getText().toString()));
+                mShoppingCartModel.setTrangThai(1);
+                addToCard(mShoppingCartModel);
             }
         });
 
@@ -160,6 +177,50 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<FoodModel>> call, @NonNull Throwable t) {
+                Log.e("TAG", "onFailure: "+t.getMessage() );
+            }
+        });
+    }
+
+    private void getUserData(String email){
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if(response.isSuccessful()){
+                    UserModel userModel = response.body();
+                    assert userModel != null;
+                    Log.e("TAG", "onResponse: "+userModel.getHoTen());
+                    mShoppingCartModel.setIdNguoiDung(userModel.getIdNguoiDung());
+                    if(userModel.getRole().equals("user")){
+                        imgEdit.setVisibility(View.GONE);
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
+            }
+        });
+    }
+    private void addToCard(ShoppingCartModel shoppingCartModel){
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<Void> call = apiInterface.addToCart(shoppingCartModel);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(ChiTietMonAnActivity.this, "Thêm món ăn vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                }else{
+                    Log.e("TAG", "onResponse: "+response.errorBody() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("TAG", "onFailure: "+t.getMessage() );
             }
         });
