@@ -25,9 +25,11 @@ import com.example.foody_app.models.InforModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +43,7 @@ public class GioHangFragment extends Fragment {
     private List<InforModel> mInforModel;
     private ListView mListView;
     private Button btnDatHang;
+    GioHangAdapter Utils;
 
     public GioHangFragment() {
         // Required empty public constructor
@@ -49,9 +52,9 @@ public class GioHangFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
+
+    
 
 
     @Override
@@ -66,8 +69,10 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
+        txtTongTien = view.findViewById(R.id.txtTongTien);
         mInforModel = new ArrayList<>();
         getInfor();
+        tinhtongtien();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
 
 
@@ -83,6 +88,16 @@ public class GioHangFragment extends Fragment {
             }
         });
     }
+
+    private void tinhtongtien() {
+        long tongtiensp = 0;
+        for(int i = 0; i < Utils.mInforModel.size(); i++){
+            tongtiensp = tongtiensp + (Utils.mInforModel.get(i).getGia() * Utils.mInforModel.get(i).getSoLuong());
+        }
+        txtTongTien.setText(String.valueOf(txtTongTien));
+    }
+
+
     private void getInfor(){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<List<InforModel>> call = apiInterface.getInfor();
@@ -107,4 +122,4 @@ public class GioHangFragment extends Fragment {
     }
 
 
-    }
+}

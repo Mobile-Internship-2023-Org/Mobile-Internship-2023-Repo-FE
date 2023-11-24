@@ -11,17 +11,25 @@ import android.widget.TextView;
 import com.example.foody_app.R;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
+import com.example.foody_app.utils.ImageClickListener;
 
 import java.util.List;
 
 public class GioHangAdapter extends BaseAdapter {
+    ImageClickListener listenner;
+
+
     private Context mContext;
-    private List<InforModel> mInforModel;
+    public List<InforModel> mInforModel;
     private FoodAdapter maAdapter;
 
-    public GioHangAdapter(Context context, List<InforModel> foodModels) {
+    public void setListenner(ImageClickListener listenner) {
+        this.listenner = listenner;
+    }
+
+    public GioHangAdapter(Context context, List<InforModel> InforModel) {
         mContext = context;
-        mInforModel = foodModels;
+        mInforModel = InforModel;
     }
 
     @Override
@@ -34,7 +42,7 @@ public class GioHangAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return mInforModel.get(i);
+        return mInforModel.get(i).getGia();
     }
 
     @Override
@@ -43,7 +51,8 @@ public class GioHangAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        ImageView mImageView;
+
+        ImageView mImageView, imgTru, imgCong;
         TextView tvTen, tvGia, tvSoLuong;
     }
 
@@ -56,18 +65,23 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.mImageView = view.findViewById(R.id.imgAnhFoodGH);
             viewHolder.tvTen = view.findViewById(R.id.tvTenMonAnGH);
             viewHolder.tvGia = view.findViewById(R.id.tvGiaMonAnGH);
-            viewHolder.tvSoLuong = view.findViewById(R.id.tvSoLuongGH);
+            viewHolder.tvSoLuong = view.findViewById(R.id.tvsoluong);
+
             view.setTag(viewHolder);
+
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
+
         viewHolder.mImageView.setImageResource(R.drawable.image);
         viewHolder.tvTen.setText(mInforModel.get(i).getTen());
         viewHolder.tvGia.setText(mInforModel.get(i).getGia() + "");
-        viewHolder.tvSoLuong.setText(2 + "");
+        viewHolder.tvSoLuong.setText(mInforModel.get(i).getSoLuong() + "");
+
+
         return view;
     }
 
-}
 
+}
