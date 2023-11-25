@@ -24,6 +24,7 @@ import com.example.foody_app.adapter.FoodAdapter;
 import com.example.foody_app.adapter.GioHangAdapter;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
+import com.example.foody_app.models.LichSuModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
@@ -42,11 +43,10 @@ public class GioHangFragment extends Fragment {
     private TextView txtTongTien;
     private FoodAdapter mAdapter;
 
-    private GioHangAdapter mGioHangAdapter;
+    private GioHangAdapter mGioHangAdapter,itemGioHangAdapter;
     private List<InforModel> mInforModel;
     private ListView mListView;
-    private Button btnDatHang;
-    GioHangAdapter Utils;
+    private Button btnDatHang;;
 
     public GioHangFragment() {
         // Required empty public constructor
@@ -54,7 +54,6 @@ public class GioHangFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -73,13 +72,12 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
-        btnPlus = view.findViewById(R.id.btncong);
-        btnMinus = view.findViewById(R.id.btntru);
+        txtTongTien = view.findViewById(R.id.txtTongTien);
 
         mInforModel = new ArrayList<>();
         getInfor();
+        tinhtongtien();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
-
 
 
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
@@ -94,7 +92,26 @@ public class GioHangFragment extends Fragment {
         });
     }
 
+    private void tinhtongtien() {
+        long tongtien = 0;
+        for (InforModel item : mInforModel) {
+            tongtien += item.getGiaBan() * item.getSoLuong();
+        }
 
+
+
+//        tongtien += itemGioHangAdapter.getGia() * itemGioHangAdapter.getSoLuong();
+
+
+
+// Format the total price as needed
+
+
+        String formattedTotalPrice = String.format("Total: $%d", tongtien);
+
+        // Set the formatted total price to the TextView
+        txtTongTien.setText(formattedTotalPrice);
+    }
 
     private void getInfor(){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
