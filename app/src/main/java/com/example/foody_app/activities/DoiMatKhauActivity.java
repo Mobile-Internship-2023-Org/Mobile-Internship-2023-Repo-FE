@@ -20,12 +20,8 @@ public class DoiMatKhauActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doi_mat_khau);
-        initControll();
         initView();
-    }
 
-
-    private void initControll() {
         btn_doi_mat_khau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +29,6 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             }
         });
     }
-
     private void doiMatKhau() {
         String str_current_pass = edt_current_password.getText().toString().trim();
         String str_new_pass = edt_new_password.getText().toString().trim();
@@ -49,8 +44,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Mật khẩu mới phải có ít nhất 6 ký tự!", Toast.LENGTH_SHORT).show();
         } else if (!str_new_pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*#?&]).+$")) {
             Toast.makeText(getApplicationContext(), "Mật khẩu mới phải bao gồm chữ cái, chữ số và ký tự đặc biệt!", Toast.LENGTH_SHORT).show();
-        } else if (str_new_pass != str_confirm_pass) {
+        } else if (!str_new_pass.equals(str_confirm_pass)) {
+            // Mật khẩu không khớp
             Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu không khớp mật khẩu mới", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Đổi mật khẩu thành công !", Toast.LENGTH_SHORT).show();
         }
     }
 
