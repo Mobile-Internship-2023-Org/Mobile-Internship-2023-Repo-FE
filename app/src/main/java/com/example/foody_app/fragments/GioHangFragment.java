@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,11 +30,14 @@ import com.example.foody_app.utils.APIInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GioHangFragment extends Fragment {
+    ImageView btnMinus, btnPlus;
+
 
     private TextView txtTongTien;
     private FoodAdapter mAdapter;
@@ -41,6 +46,7 @@ public class GioHangFragment extends Fragment {
     private List<InforModel> mInforModel;
     private ListView mListView;
     private Button btnDatHang;
+    GioHangAdapter Utils;
 
     public GioHangFragment() {
         // Required empty public constructor
@@ -48,10 +54,11 @@ public class GioHangFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
-
     }
+
+    
 
 
     @Override
@@ -66,6 +73,9 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
+        btnPlus = view.findViewById(R.id.btncong);
+        btnMinus = view.findViewById(R.id.btntru);
+
         mInforModel = new ArrayList<>();
         getInfor();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
@@ -83,6 +93,9 @@ public class GioHangFragment extends Fragment {
             }
         });
     }
+
+
+
     private void getInfor(){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<List<InforModel>> call = apiInterface.getInfor();
@@ -107,4 +120,4 @@ public class GioHangFragment extends Fragment {
     }
 
 
-    }
+}

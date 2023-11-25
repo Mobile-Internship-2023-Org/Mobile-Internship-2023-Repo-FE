@@ -3,25 +3,18 @@ package com.example.foody_app.models;
 import android.widget.ImageView;
 
 public class InforModel {
-    private Integer soluong;
+    private Integer soLuong;
     private ImageView anh;
     private String ten;
-    private Integer gia;
-
-
-
-    public InforModel(Integer soluong, ImageView anh, String ten, Integer gia) {
-        this.soluong = soluong;
-        this.anh = anh;
-        this.ten = ten;
-        this.gia = gia;
-    }
+    private Integer giaBan;
 
     public Integer getSoLuong() {
-        return soluong;
+        return soLuong;
     }
 
-    public void setSoLuong(Integer soluong) {this.soluong = soluong;}
+    public void setSoLuong(Integer soLuong) {
+        this.soLuong = soLuong;
+    }
 
     public ImageView getAnh() {
         return anh;
@@ -39,11 +32,11 @@ public class InforModel {
         this.ten = ten;
     }
 
-    public Integer getGia() {
-        return gia;
+    public Integer getGiaBan() {
+        return giaBan;
     }
 
-    public void setIdTheLoai(Integer gia) {
-        this.gia = gia;
+    public void setGiaBan(Integer giaBan) {
+        this.giaBan = giaBan;
     }
 }
