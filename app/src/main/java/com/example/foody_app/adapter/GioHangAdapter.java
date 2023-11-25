@@ -106,7 +106,7 @@ public class GioHangAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // Update the selected position and highlight the item
                 selectedPosition = position;
-                notifyDataSetChanged();
+
             }
         });
 

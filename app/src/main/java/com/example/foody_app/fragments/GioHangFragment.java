@@ -54,6 +54,7 @@ public class GioHangFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -91,7 +92,6 @@ public class GioHangFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
 
