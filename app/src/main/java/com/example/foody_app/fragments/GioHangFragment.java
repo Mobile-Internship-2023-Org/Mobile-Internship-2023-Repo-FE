@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +27,6 @@ import com.example.foody_app.models.InforModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GioHangFragment extends Fragment {
+    ImageView btnMinus, btnPlus;
+
 
     private TextView txtTongTien;
     private FoodAdapter mAdapter;
@@ -69,10 +72,11 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
-        txtTongTien = view.findViewById(R.id.txtTongTien);
+        btnPlus = view.findViewById(R.id.btncong);
+        btnMinus = view.findViewById(R.id.btntru);
+
         mInforModel = new ArrayList<>();
         getInfor();
-        tinhtongtien();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
 
 
@@ -87,15 +91,9 @@ public class GioHangFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
     }
 
-    private void tinhtongtien() {
-        long tongtiensp = 0;
-        for(int i = 0; i < Utils.mInforModel.size(); i++){
-            tongtiensp = tongtiensp + (Utils.mInforModel.get(i).getGia() * Utils.mInforModel.get(i).getSoLuong());
-        }
-        txtTongTien.setText(String.valueOf(txtTongTien));
-    }
 
 
     private void getInfor(){
