@@ -59,6 +59,7 @@ public interface APIInterface {
     Call<LoginRegisterModel> loginRegisterModelCall(@Body LoginRegisterModel loginRegisterModel);
 
     //lấy dữ liệu người dùng theo email
+    @GET("/user/{email}")
     Call<UserModel> getUserByEmail(@Path("email") String email);
 
     @GET("/getInfor")

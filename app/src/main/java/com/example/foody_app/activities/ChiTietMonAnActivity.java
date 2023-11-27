@@ -25,6 +25,7 @@ import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 import com.example.foody_app.utils.UserModelHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,9 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ImageView imgEdit;
     private TextView tvTen, tvGiaBan, tvSoLuong, tvGia;
-    private ImageView imgMinus, imgPlus;
+    private ImageView imgMinus, imgPlus, imgFood, imgBack;
     private FoodModel model;
+    private androidx.appcompat.widget.Toolbar mToolbar;
     private LinearLayout mLayout;
     private ShoppingCartModel mShoppingCartModel = new ShoppingCartModel();
 
@@ -56,7 +58,6 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         DangNhapActivity activity = new DangNhapActivity();
         getUserData(activity.readEmailLocally(ChiTietMonAnActivity.this));
         long id = getIntent().getLongExtra("idFood", -1);
-        mShoppingCartModel.setIdMonAn(Long.valueOf(id).intValue());
         Integer type = getIntent().getIntExtra("idType",-1);
         tvSoLuong.setText(1+"");
         /**
@@ -87,12 +88,32 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         mFoodModels = new ArrayList<>();
         getFoodById(Long.toString(id));
         getFoodByType(type, (int) id);
-        mAdapter2 = new FoodAdapter2(mFoodModels);
+        mAdapter2 = new FoodAdapter2(mFoodModels, new FoodAdapter2.OnItemClickListener() {
+            @Override
+            public void onItemClick(FoodModel item) {
+                getFoodById(item.getIdMonAn().toString());
+                //Toast.makeText(getApplicationContext(), ""+item.getIdMonAn(), Toast.LENGTH_SHORT).show();
+            }
+        });
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(ChiTietMonAnActivity.this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setAdapter(mAdapter2);
         mRecyclerView.setLayoutManager(layoutManager);
 
+        /**
+         * xử lý sự kiện back trên toolbar
+         */
+        mToolbar.setNavigationIcon(R.drawable.back1);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        /**
+         * xử lý sự kiện click item edit trên layout
+         */
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +146,9 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         imgPlus = findViewById(R.id.imgPlus);
         tvGia = findViewById(R.id.tvGia);
         mLayout = findViewById(R.id.layout_cart);
+        imgFood = findViewById(R.id.imgFoodCT);
+        //imgBack = findViewById(R.id.imgBack);
+        mToolbar = findViewById(R.id.toolBarCT);
     }
 
     /**
@@ -144,6 +168,8 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
                     tvTen.setText(model.getTen());
                     tvGiaBan.setText(model.getGiaBan()+"đ/suất");
                     tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+                    mShoppingCartModel.setIdMonAn(model.getIdMonAn());
+                    Picasso.get().load(model.getAnh()).into(imgFood);
 
                 }else {
                     Log.e("TAG", "onResponse: "+response.errorBody() );
@@ -157,6 +183,12 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param type
+     * @param id
+     * function lấy đồ ăn theo loại
+     */
     private void getFoodByType(Integer type, Integer id){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<List<FoodModel>> call = apiInterface.getFoodByType(type, id);
@@ -182,6 +214,10 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * function lấy thông tin  người dùng theo email
+     * @param email
+     */
     private void getUserData(String email){
         UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
             @SuppressLint("SetTextI18n")
