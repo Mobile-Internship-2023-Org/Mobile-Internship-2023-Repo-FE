@@ -79,10 +79,6 @@ public class GioHangFragment extends Fragment {
         mInforModel = new ArrayList<>();
         getInfor();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
-
-
-
-        mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
         mListView.setAdapter(mGioHangAdapter);
 
         btnDatHang.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +99,7 @@ public class GioHangFragment extends Fragment {
             @Override
             public void onResponse(Call<List<InforModel>> call, Response<List<InforModel>> response) {
                 if(response.isSuccessful()){
-                    Log.e("TAG", "onResponse: "+response.body());
+                    Log.e("TAG", "onResponse: "+response.body().size());
                     mInforModel.clear();
                     mInforModel.addAll(response.body());
                     mGioHangAdapter.notifyDataSetChanged();

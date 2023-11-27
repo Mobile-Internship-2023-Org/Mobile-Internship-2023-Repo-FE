@@ -157,9 +157,9 @@ public class DanhSachMonAnFragment extends Fragment {
                     if(response.body().getHoTen() != null){
                         tvNguoiDung.setText("Hi "+response.body().getHoTen());
                     }
-                    if(userModel.getRole().equals("user")){
-                        fabAddFood.setVisibility(View.GONE);
-                    }
+//                    if(userModel.getRole().equals("user")){
+//                        fabAddFood.setVisibility(View.GONE);
+//                    }
                 }else{
 
                 }
