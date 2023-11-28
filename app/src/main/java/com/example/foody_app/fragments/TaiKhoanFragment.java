@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foody_app.R;
 import com.example.foody_app.activities.DangNhapActivity;
@@ -22,8 +23,6 @@ import com.example.foody_app.activities.ThongTinNhaHangActivity;
 import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.UserModelHelper;
 import com.squareup.picasso.Picasso;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,8 +77,7 @@ public class TaiKhoanFragment extends Fragment {
         });
 
         cvLogOut.setOnClickListener(view13 -> {
-            Intent intent = new Intent(getContext(), DangNhapActivity.class);
-            startActivity(intent);
+            requireActivity().finish();
         });
     }
     private void onBindView(@NonNull View view){
@@ -91,10 +89,13 @@ public class TaiKhoanFragment extends Fragment {
         tvTen = view.findViewById(R.id.tvTenND);
     }
 
+    /**
+     * lấy dữ liệu người dùng theo @param email
+     */
     private void getUserData(String email){
         UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 if(response.isSuccessful()){
                     assert response.body() != null;
                     if(response.body().getAnh() != null){
@@ -105,12 +106,14 @@ public class TaiKhoanFragment extends Fragment {
                     }else{
                         tvTen.setText(response.body().getEmail());
                     }
+                }else{
+                    Toast.makeText(getActivity(), "lấy thông tin người dùng thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
+                Toast.makeText(getActivity(), "lỗi "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

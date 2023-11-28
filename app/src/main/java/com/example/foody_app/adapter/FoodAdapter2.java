@@ -1,6 +1,8 @@
 package com.example.foody_app.adapter;
 
 
+import static com.example.foody_app.activities.ChiTietMonAnActivity.currencyFormat;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +69,7 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.ViewHolder> 
         }
         public void bind(final FoodModel item, final OnItemClickListener listener) {
             tvTen.setText(item.getTen());
-            tvGia.setText(item.getGiaBan()+"đ");
+            tvGia.setText(currencyFormat(item.getGiaBan()+"")+"đ");
             Picasso.get().load(item.getAnh()).into(mImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

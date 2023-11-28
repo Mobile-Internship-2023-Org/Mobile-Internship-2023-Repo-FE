@@ -4,6 +4,7 @@ import com.example.foody_app.adapter.GioHangAdapter;
 import com.example.foody_app.fragments.GioHangFragment;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
+import com.example.foody_app.models.RatingModel;
 import com.example.foody_app.models.RestaurantModel;
 import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.models.TypeFood;
@@ -67,4 +68,7 @@ public interface APIInterface {
 
     @POST("/addToCart")
     Call<Void> addToCart(@Body ShoppingCartModel model);
+    //lấy đánh giá của người dùng
+    @GET("/rating")
+    Call<List<RatingModel>> getRating();
 }
