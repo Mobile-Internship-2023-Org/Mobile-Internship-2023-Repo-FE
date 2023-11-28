@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.DangNhapActivity;
 import com.example.foody_app.activities.DoiMatKhauActivity;
 import com.example.foody_app.activities.DoiThongTinTKActivity;
 import com.example.foody_app.activities.ThongTinNhaHangActivity;
@@ -62,7 +63,10 @@ public class TaiKhoanFragment extends Fragment {
             startActivity(intent);
         });
 
-        cvLogOut.setOnClickListener(view13 -> requireActivity().finish());
+        cvLogOut.setOnClickListener(view13 -> {
+            Intent intent = new Intent(getContext(), DangNhapActivity.class);
+            startActivity(intent);
+        });
     }
     private void onBindView(@NonNull View view){
         cvInfoRestaurant = view.findViewById(R.id.cvInfoRestaurant);
