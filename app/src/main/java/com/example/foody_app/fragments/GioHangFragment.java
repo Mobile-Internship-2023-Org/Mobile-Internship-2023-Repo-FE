@@ -24,7 +24,6 @@ import com.example.foody_app.adapter.FoodAdapter;
 import com.example.foody_app.adapter.GioHangAdapter;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
-import com.example.foody_app.models.LichSuModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
@@ -43,10 +42,11 @@ public class GioHangFragment extends Fragment {
     private TextView txtTongTien;
     private FoodAdapter mAdapter;
 
-    private GioHangAdapter mGioHangAdapter,itemGioHangAdapter;
+    private GioHangAdapter mGioHangAdapter;
     private List<InforModel> mInforModel;
     private ListView mListView;
-    private Button btnDatHang;;
+    private Button btnDatHang;
+    GioHangAdapter Utils;
 
     public GioHangFragment() {
         // Required empty public constructor
@@ -54,6 +54,7 @@ public class GioHangFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -72,12 +73,14 @@ public class GioHangFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = view.findViewById(R.id.listViewCart);
         btnDatHang = view.findViewById(R.id.btnDatHang);
-        txtTongTien = view.findViewById(R.id.txtTongTien);
+        btnPlus = view.findViewById(R.id.btncong);
+        btnMinus = view.findViewById(R.id.btntru);
 
         mInforModel = new ArrayList<>();
         getInfor();
         tinhtongtien();
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);
+
 
 
         mGioHangAdapter = new GioHangAdapter(getContext(), mInforModel);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.models.InforModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class GioHangAdapter extends BaseAdapter {
 
         final InforModel currentItem = mInforModel.get(position);
 
-        viewHolder.mImageView.setImageResource(R.drawable.image);
+        Picasso.get().load(currentItem.getAnh()).into(viewHolder.mImageView);
         viewHolder.tvTen.setText(currentItem.getTen());
         viewHolder.tvGia.setText(currentItem.getGiaBan() + "");
         viewHolder.tvSoLuong.setText(currentItem.getSoLuong() + "");
