@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e("TAG", "onCreate: "+email );
         getUserData(email);
 
-        //ẩn item giỏ hàng hoặc thông kê theo từng role
-//        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
-//        mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
-        //thsmh text
-
         ReplaceFragment(new DanhSachMonAnFragment());
 
         mNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -96,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     UserModel userModel = response.body();
                     Log.e("", "onResponse: "+userModel.getHoTen() );
-                    if(userModel.getRole().equals("admin")){
-                        mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
-                    }else{
-                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
-                    }
+//                    if(userModel.getRole().equals("admin")){
+//                        mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
+//                    }else{
+//                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
+//                    }
                 } else {
                     Log.e("TAG", "onResponse: " + response.errorBody());
                 }

@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 public class InforModel {
     private Integer soLuong;
-    private ImageView anh;
+    private String anh;
     private String ten;
     private Integer giaBan;
 
@@ -16,11 +16,11 @@ public class InforModel {
         this.soLuong = soLuong;
     }
 
-    public ImageView getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(ImageView anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 

@@ -64,29 +64,6 @@ public class DangNhapActivity extends AppCompatActivity {
 
     }
 
-//    private void  loginUser(){
-//        String email = edtEmail.getText().toString();
-//        String password = edtPass.getText().toString();
-//        LoginModel loginModel = new LoginModel(email,password);
-//        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
-//        Call<LoginModel> call = apiInterface.loginModelCall(loginModel);
-//        call.enqueue(new Callback<LoginModel>() {
-//            @Override
-//            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
-//                Toast.makeText(DangNhapActivity.this, "ok", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LoginModel> call, Throwable t) {
-//                Toast.makeText(DangNhapActivity.this, "Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
-
-    //
-
     private void  loginUser(){
         String email = edtEmail.getText().toString();
         String password = edtPass.getText().toString();
@@ -97,22 +74,20 @@ public class DangNhapActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                 if (response.isSuccessful()) {
-                    LoginRegisterModel loginModel1 = response.body();
-
                     // Chuyển sang màn hình chính (MainActivity)
                     Intent intent = new Intent(DangNhapActivity.this, MainActivity.class);
                     startActivity(intent);
-                    Toast.makeText(DangNhapActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     saveEmailLocally(email);
                 }else {
                     // Xử lý khi response không thành công
-                    Toast.makeText(DangNhapActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DangNhapActivity.this, "Đăng nhập không thành công, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
-                Toast.makeText(DangNhapActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DangNhapActivity.this, "Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

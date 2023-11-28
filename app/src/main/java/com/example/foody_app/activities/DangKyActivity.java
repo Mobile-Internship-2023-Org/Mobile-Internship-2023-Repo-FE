@@ -16,6 +16,9 @@ import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +28,9 @@ public class DangKyActivity extends AppCompatActivity {
     private TextView txtSignIn;
     private EditText edtUsername, edtEmail,edtPassword,edtRePassword;
     private Button btnRegister;
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
 
 
     @Override
@@ -44,15 +50,26 @@ public class DangKyActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUser();
+                if(validate()){
+                    if(edtPassword.getText().toString().equals(edtRePassword.getText().toString())){
+                        if(regexEmail(edtEmail.getText().toString())){
+                            registerUser();
+                        }else{
+                            Toast.makeText(DangKyActivity.this, "email không đúng", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(DangKyActivity.this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(DangKyActivity.this, "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         txtSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DangKyActivity.this,DangNhapActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -68,25 +85,36 @@ public class DangKyActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                 if (response.isSuccessful()) {
-                    LoginRegisterModel loginRegisterModel1 = response.body();
-
-                    // Chuyển sang màn hình chính (MainActivity)
-                    Intent intent = new Intent(DangKyActivity.this, DangNhapActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(DangKyActivity.this, "Đang ký thành công", Toast.LENGTH_SHORT).show();
                     finish(); // Đóng màn hình hiện tại nếu bạn không muốn quay lại màn hình đăng nhập
-                    Toast.makeText(DangKyActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
                 }else {
                     // Xử lý khi response không thành công
-                    Toast.makeText(DangKyActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DangKyActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<LoginRegisterModel> call, Throwable t) {
-                Toast.makeText(DangKyActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DangKyActivity.this, "lỗi"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private boolean validate(){
+        if(edtEmail.getText().toString().isEmpty()){
+            return false;
+        }
+        if (edtPassword.getText().toString().isEmpty()){
+            return false;
+        }
+        if(edtRePassword.getText().toString().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    public static boolean regexEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.matches();
     }
 
 }
