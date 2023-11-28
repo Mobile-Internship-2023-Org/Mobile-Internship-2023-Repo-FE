@@ -1,5 +1,6 @@
 package com.example.foody_app.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,17 +15,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
+import com.example.foody_app.MainActivity;
 import com.example.foody_app.R;
 import com.example.foody_app.activities.ChiTietHoaDonActivity;
 import com.example.foody_app.activities.ChiTietMonAnActivity;
+import com.example.foody_app.activities.DangNhapActivity;
 import com.example.foody_app.activities.DanhGiaActivity;
 import com.example.foody_app.activities.ThemMonAnActivity;
 import com.example.foody_app.activities.TimKiemActivity;
 import com.example.foody_app.adapter.FoodAdapter;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
+import com.example.foody_app.utils.UserModelHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonArray;
 
@@ -42,6 +48,7 @@ public class DanhSachMonAnFragment extends Fragment {
     private List<FoodModel> mFoodModels;
     private FoodAdapter mAdapter;
     private GridView mGridView;
+    private TextView tvNguoiDung;
 
     public DanhSachMonAnFragment() {
         // Required empty public constructor
@@ -73,6 +80,8 @@ public class DanhSachMonAnFragment extends Fragment {
         getAllFood();
         mGridView.setAdapter(mAdapter);
 
+        DangNhapActivity dangNhapActivity = new DangNhapActivity();
+        getUserData(dangNhapActivity.readEmailLocally(getContext()));
         fabAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +118,7 @@ public class DanhSachMonAnFragment extends Fragment {
         fabAddFood = view.findViewById(R.id.fabAddFood);
         cardViewSearch = view.findViewById(R.id.cardViewSearch);
         mGridView = view.findViewById(R.id.grid_ds);
+        tvNguoiDung = view.findViewById(R.id.tvNguoiDung);
     }
 
     /**
@@ -132,6 +142,32 @@ public class DanhSachMonAnFragment extends Fragment {
             @Override
             public void onFailure(Call<List<FoodModel>> call, Throwable t) {
                 Log.e("TAG", "onFailure: "+t.getMessage());
+            }
+        });
+    }
+    private void getUserData(String email){
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if(response.isSuccessful()){
+                    UserModel userModel = response.body();
+                    assert userModel != null;
+                    Log.e("TAG", "onResponse: "+userModel.getHoTen());
+                    if(response.body().getHoTen() != null){
+                        tvNguoiDung.setText("Hi "+response.body().getHoTen());
+                    }
+//                    if(userModel.getRole().equals("user")){
+//                        fabAddFood.setVisibility(View.GONE);
+//                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
             }
         });
     }

@@ -11,19 +11,30 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.activities.DangNhapActivity;
 import com.example.foody_app.activities.DoiMatKhauActivity;
 import com.example.foody_app.activities.DoiThongTinTKActivity;
 import com.example.foody_app.activities.ThongTinNhaHangActivity;
+import com.example.foody_app.models.UserModel;
+import com.example.foody_app.utils.UserModelHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TaiKhoanFragment extends Fragment {
 
     private CardView cvInfoRestaurant, cvChangeInfoUser, cvChangePassword, cvLogOut;
+    private ImageView imgAVT;
+    private TextView tvTen;
 
     public TaiKhoanFragment() {
         // Required empty public constructor
@@ -47,6 +58,9 @@ public class TaiKhoanFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         onBindView(view);
+
+        DangNhapActivity activity = new DangNhapActivity();
+        getUserData(activity.readEmailLocally(requireContext()));
 
         cvInfoRestaurant.setOnClickListener(view14 -> {
             Intent intent = new Intent(getContext(), ThongTinNhaHangActivity.class);
@@ -73,5 +87,31 @@ public class TaiKhoanFragment extends Fragment {
         cvChangeInfoUser = view.findViewById(R.id.cvChangeInfoUser);
         cvChangePassword = view.findViewById(R.id.cvChangePassword);
         cvLogOut = view.findViewById(R.id.cvLogOut);
+        imgAVT = view.findViewById(R.id.imgAVT);
+        tvTen = view.findViewById(R.id.tvTenND);
+    }
+
+    private void getUserData(String email){
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if(response.isSuccessful()){
+                    assert response.body() != null;
+                    if(response.body().getAnh() != null){
+                        Picasso.get().load(response.body().getAnh()).into(imgAVT);
+                    }
+                    if(response.body().getHoTen() != null){
+                        tvTen.setText(response.body().getHoTen());
+                    }else{
+                        tvTen.setText(response.body().getEmail());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
+            }
+        });
     }
 }
