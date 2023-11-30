@@ -8,6 +8,7 @@ import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.models.TypeFood;
 import com.example.foody_app.models.ShoppingCartModel;
 import com.example.foody_app.models.UserModel;
+import com.example.foody_app.models.updateResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.PUT;
 import retrofit2.http.GET;
@@ -38,6 +40,7 @@ public interface APIInterface {
     @GET("/listTypeFood")
     Call<Map<String, List<TypeFood>>> getTheLoai();
 
+    // thêm món ăn
     @Multipart
     @POST("/addFood")
     Call<FoodModel> addFood(
@@ -47,6 +50,19 @@ public interface APIInterface {
             @Part("giaGiam") RequestBody giaGiam,
             @Part("idTheLoai") RequestBody idTheLoai
     );
+    @Multipart
+    @PUT("/updateFood/{idMonAn}")
+    Call<updateResponse> updateFood(
+            @Path("idMonAn") int idMonAn,
+            @Part MultipartBody.Part anh,
+            @Part("ten") RequestBody ten,
+            @Part("giaBan") RequestBody giaBan,
+            @Part("giaGiam") RequestBody giaGiam,
+            @Part("idTheLoai") RequestBody idTheLoai
+    );
+    // xóa món ăn(ẩn)
+    @PUT("/deleteFood/{idMonAn}")
+    Call<updateResponse> deleteFood(@Path("idMonAn") int idMonAn, @Body RequestBody body);
 
     // lấy thông tin nhà hàng
     @GET("/nhahang")

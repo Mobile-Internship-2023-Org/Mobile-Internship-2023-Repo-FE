@@ -127,7 +127,17 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // tạo intent chuyển màn hình từ ChiTietMonAnActivity qua SuaMonAnActivity
                 Intent intent = new Intent(ChiTietMonAnActivity.this, SuaMonAnActivity.class);
+
+                // put dữ liệu vào intent để truyền đi
+                intent.putExtra("idMonAn", model.getIdMonAn());
+                intent.putExtra("anh", model.getAnh());
+                intent.putExtra("ten", model.getTen());
+                intent.putExtra("theLoai", model.getIdTheLoai());
+                intent.putExtra("giaBan", model.getGiaBan());
+                intent.putExtra("giaGiam", model.getGiaGiam());
+
                 startActivity(intent);
             }
         });
