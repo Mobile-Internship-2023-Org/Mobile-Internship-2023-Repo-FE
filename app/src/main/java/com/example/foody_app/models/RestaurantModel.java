@@ -3,17 +3,17 @@ public class RestaurantModel {
     private String anh;
     private String ten;
     private String sdt;
-    private String fanPage;
+    private String fanpage;
     private String diaChi;
 
     public RestaurantModel() {
     }
 
-    public RestaurantModel(String anh, String ten, String sdt, String fanPage, String diaChi) {
+    public RestaurantModel(String anh, String ten, String sdt, String fanpage, String diaChi) {
         this.anh = anh;
         this.ten = ten;
         this.sdt = sdt;
-        this.fanPage = fanPage;
+        this.fanpage = fanpage;
         this.diaChi = diaChi;
     }
 
@@ -41,12 +41,12 @@ public class RestaurantModel {
         this.sdt = sdt;
     }
 
-    public String getFanPage() {
-        return fanPage;
+    public String getFanpage() {
+        return fanpage;
     }
 
-    public void setFanPage(String fanPage) {
-        this.fanPage = fanPage;
+    public void setFanpage(String fanpage) {
+        this.fanpage = fanpage;
     }
 
     public String getDiaChi() {
