@@ -14,12 +14,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foody_app.R;
 import com.example.foody_app.adapter.FoodAdapter2;
+import com.example.foody_app.adapter.RatingAdapter;
 import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.RatingModel;
 import com.example.foody_app.models.ShoppingCartModel;
 import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
@@ -27,6 +30,7 @@ import com.example.foody_app.utils.APIInterface;
 import com.example.foody_app.utils.UserModelHelper;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +50,9 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar mToolbar;
     private LinearLayout mLayout;
     private ShoppingCartModel mShoppingCartModel = new ShoppingCartModel();
+    private List<RatingModel> mRatingModels = new ArrayList<>();
+    private RatingAdapter mRatingAdapter;
+    private RecyclerView lvDanhGia;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -57,6 +64,11 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
 
         DangNhapActivity activity = new DangNhapActivity();
         getUserData(activity.readEmailLocally(ChiTietMonAnActivity.this));
+        mRatingAdapter = new RatingAdapter(ChiTietMonAnActivity.this,mRatingModels);
+        getRating();
+
+        lvDanhGia.setAdapter(mRatingAdapter);
+        lvDanhGia.setLayoutManager(new LinearLayoutManager(ChiTietMonAnActivity.this));
         long id = getIntent().getLongExtra("idFood", -1);
         Integer type = getIntent().getIntExtra("idType",-1);
         tvSoLuong.setText(1+"");
@@ -71,7 +83,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
                 if(Integer.parseInt(tvSoLuong.getText().toString()) < 1){
                     tvSoLuong.setText(1+"");
                 }
-                tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+                tvGia.setText(currencyFormat(model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString())+"")+"đ");
             }
         });
         /**
@@ -82,7 +94,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tvSoLuong.setText((Integer.parseInt(tvSoLuong.getText().toString()) + 1)+"");
-                tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+                tvGia.setText(currencyFormat(model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString())+"")+"đ");
             }
         });
         mFoodModels = new ArrayList<>();
@@ -149,6 +161,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         imgFood = findViewById(R.id.imgFoodCT);
         //imgBack = findViewById(R.id.imgBack);
         mToolbar = findViewById(R.id.toolBarCT);
+        lvDanhGia = findViewById(R.id.lvDanhGia);
     }
 
     /**
@@ -166,8 +179,8 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
                     model = response.body();
                     assert model != null;
                     tvTen.setText(model.getTen());
-                    tvGiaBan.setText(model.getGiaBan()+"đ/suất");
-                    tvGia.setText((model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString()))+"đ");
+                    tvGiaBan.setText(currencyFormat(model.getGiaBan()+"")+"đ/suất");
+                    tvGia.setText(currencyFormat(model.getGiaBan()*Integer.parseInt(tvSoLuong.getText().toString())+"")+"đ");
                     mShoppingCartModel.setIdMonAn(model.getIdMonAn());
                     Picasso.get().load(model.getAnh()).into(imgFood);
 
@@ -222,7 +235,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 if(response.isSuccessful()){
                     UserModel userModel = response.body();
                     assert userModel != null;
@@ -237,17 +250,22 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
 
             }
         });
     }
+
+    /**
+     * thêm món ăn vào giỏ hàng
+     * @param shoppingCartModel
+     */
     private void addToCard(ShoppingCartModel shoppingCartModel){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<Void> call = apiInterface.addToCart(shoppingCartModel);
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(ChiTietMonAnActivity.this, "Thêm món ăn vào giỏ hàng", Toast.LENGTH_SHORT).show();
                 }else{
@@ -256,10 +274,38 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 Log.e("TAG", "onFailure: "+t.getMessage() );
             }
         });
     }
+    /**
+     * lấy đánh giá người dùng
+     */
+    private void getRating(){
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<List<RatingModel>> call = apiInterface.getRating();
+        call.enqueue(new Callback<List<RatingModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<RatingModel>> call, @NonNull Response<List<RatingModel>> response) {
+                if(response.isSuccessful()){
+                    mRatingModels.clear();
+                    assert response.body() != null;
+                    mRatingModels.addAll(response.body());
+                    mRatingAdapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(ChiTietMonAnActivity.this, "lấy dữ liệu không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<List<RatingModel>> call, @NonNull Throwable t) {
+                Toast.makeText(ChiTietMonAnActivity.this, "lỗi"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public static String currencyFormat(String amount) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0");
+        return formatter.format(Double.parseDouble(amount));
+    }
 }

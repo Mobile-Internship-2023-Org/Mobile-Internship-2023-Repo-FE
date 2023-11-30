@@ -3,7 +3,10 @@ package com.example.foody_app.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.foody_app.R;
 import com.example.foody_app.models.ErrorResponseModel;
 import com.example.foody_app.models.RestaurantModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -28,6 +34,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThongTinNhaHangActivity extends AppCompatActivity {
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private Uri selectedImageUri;
+
     APIInterface apiInterface;
     ImageView myBack,imgShop;
     TextView edName,edPhoneNumber,edFanpage,edAddress;
@@ -38,18 +47,11 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thong_tin_nha_hang);
         initView();
         setOnclickToolbar();
-
+        setOnclickUpdate();
         // Initialize Retrofit
         apiInterface = APIClient.getInstance().create(APIInterface.class);
-
-
         getRestaurantInfo();
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateRestaurantInfo();
-            }
-        });
+        pickImageFromGallery();
     }
     private void initView(){
         myBack = (ImageView) findViewById(R.id.myBack);
@@ -60,6 +62,24 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
         edAddress = (TextView)  findViewById(R.id.edAddress);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
     }
+    private void pickImageFromGallery() {
+        imgShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+            }
+        });
+    }
+    private void setOnclickUpdate(){
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateRestaurantInfo();
+            }
+        });
+    }
     private void setOnclickToolbar(){
         myBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +88,19 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Lấy đường dẫn của ảnh được chọn
+            selectedImageUri  = Uri.parse(data.getData().toString());
+
+            // Hiển thị ảnh đã chọn trên ImageView
+            imgShop.setImageURI(data.getData());
+        }
+    }
+
     private void getRestaurantInfo() {
         Call<List<RestaurantModel>> call = apiInterface.getNhahang();
         call.enqueue(new Callback<List<RestaurantModel>>() {
@@ -81,6 +114,8 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
                         RestaurantModel restaurant = restaurantList.get(0);
                         // Update UI or perform other actions
                         updateUI(restaurant);
+                        // Load and display the image from Firebase Storage
+                        loadFirebaseImage(restaurant.getAnh());
                     }
                 } else {
                     Log.e("TAG", "onResponse error: " + response.errorBody());
@@ -93,6 +128,15 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
             }
         });
     }
+    // Add the following method to load and display the image using Glide
+    private void loadFirebaseImage(String imageUrl) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(imageUrl)
+                    .into(imgShop);
+        }
+    }
+
     /**
      * Gọi API để cập nhật thông tin nhà hàng dựa trên dữ liệu nhập từ bàn phím người dùng.
      * Nếu thành công, hiển thị thông báo và cập nhật giao diện người dùng nếu cần.
@@ -113,11 +157,48 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
         RestaurantModel updatedRestaurant = new RestaurantModel();
         updatedRestaurant.setTen(edName.getText().toString());
         updatedRestaurant.setSdt(phoneNumber);  // Set the validated phone number
-        updatedRestaurant.setFanPage(edFanpage.getText().toString());
+        updatedRestaurant.setFanpage(edFanpage.getText().toString());
         updatedRestaurant.setDiaChi(edAddress.getText().toString());
 
-        // Make the API call to update the restaurant information
-        Call<Void> call = apiInterface.updateNhahang(updatedRestaurant);
+        // Check if an image is selected
+        if (selectedImageUri != null) {
+            // Upload image to Firebase Storage
+            uploadImageToFirebase(updatedRestaurant);
+        } else {
+            // If no image is selected, directly make the API call to update the restaurant information
+            updateRestaurantInfoWithoutImage(updatedRestaurant);
+        }
+    }
+
+    private void uploadImageToFirebase(final RestaurantModel restaurant) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference().child("images");
+
+        // Create a unique file name (e.g., timestamp to ensure uniqueness)
+        String fileName = "image_" + System.currentTimeMillis() + ".jpg";
+
+        StorageReference imageRef = storageRef.child(fileName);
+
+        imageRef.putFile(selectedImageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    // Get the download URL of the uploaded image
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        // Update the image URL in the RestaurantModel object
+                        restaurant.setAnh(uri.toString());
+
+                        // Continue to update restaurant information with the image
+                        updateRestaurantInfoWithImage(restaurant);
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the case when image upload fails
+                    Toast.makeText(ThongTinNhaHangActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void updateRestaurantInfoWithImage(RestaurantModel restaurant) {
+        // Make the API call to update the restaurant information, including the image URL
+        Call<Void> call = apiInterface.updateNhahang(restaurant);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -125,47 +206,34 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
                     // Handle successful response
                     Toast.makeText(ThongTinNhaHangActivity.this, "Restaurant information updated successfully", Toast.LENGTH_SHORT).show();
                     // You may update UI or perform other actions if needed
-                } else {
-                    handleErrorResponse(response);
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                handleFailure(t);
+                Toast.makeText(ThongTinNhaHangActivity.this, "Failed to update restaurant information", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    private void handleFailure(Throwable t) {
-        Log.e("TAG", "onFailure: " + t.getMessage());
-
-        // You can handle specific failure cases here if needed
-
-        Toast.makeText(ThongTinNhaHangActivity.this, "Failed to update restaurant information", Toast.LENGTH_SHORT).show();
-    }
-
-    private void handleErrorResponse(Response<Void> response) {
-        if (response.errorBody() != null) {
-            try {
-                String errorBody = response.errorBody().string();
-                Log.e("TAG", "onResponse error: " + errorBody);
-
-                // Use Gson to parse the error body if needed
-                Gson gson = new Gson();
-                ErrorResponseModel errorResponse = gson.fromJson(errorBody, ErrorResponseModel.class);
-
-                // Now you can access fields in the error response model and handle accordingly
-                String errorMessage = errorResponse.getMessage();
-
-                Toast.makeText(ThongTinNhaHangActivity.this, "Failed to update restaurant information: " + errorMessage, Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void updateRestaurantInfoWithoutImage(RestaurantModel restaurant) {
+        // Make the API call to update the restaurant information without the image
+        Call<Void> call = apiInterface.updateNhahang(restaurant);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Handle successful response
+                    Toast.makeText(ThongTinNhaHangActivity.this, "Restaurant information updated successfully", Toast.LENGTH_SHORT).show();
+                    // You may update UI or perform other actions if needed
+                }
             }
-        } else {
-            Toast.makeText(ThongTinNhaHangActivity.this, "Failed to update restaurant information", Toast.LENGTH_SHORT).show();
-        }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(ThongTinNhaHangActivity.this, "Failed to update restaurant information", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
@@ -182,7 +250,7 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
 
             edName.setText(restaurant.getTen());
             edPhoneNumber.setText(restaurant.getSdt());
-            edFanpage.setText(restaurant.getFanPage());
+            edFanpage.setText(restaurant.getFanpage());
             edAddress.setText(restaurant.getDiaChi());
         }
     }
