@@ -76,27 +76,34 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         />
-
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Email" />
+        android:background="@drawable/edit_text_background"
+        android:hint="Email"
+        android:padding="10dp" />
+
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:hint="Password"/>
+        android:padding="10dp" />
+
     <EditText
         android:id="@+id/edtRePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Re-Password"
         android:inputType="textPassword"
-        android:hint="Re-Password"/>
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/btnRegister"
