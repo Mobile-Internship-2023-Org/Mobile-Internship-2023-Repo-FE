@@ -90,7 +90,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
-            android:text="Địa chỉ giao hàng"
+            android:text="Thời gian giao hàng"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/changeTimeTv"
@@ -138,7 +138,8 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"/>
 
         <!-- Line -->
 
@@ -151,7 +152,8 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grayLine" />
+            app:layout_constraintTop_toBottomOf="@+id/grayLine"
+            android:visibility="invisible"/>
 
         <View
             android:id="@+id/grayLine"
@@ -188,13 +190,12 @@
 
         <View
             android:id="@+id/grayLine2"
-            android:layout_width="411dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
             android:background="@color/grayMedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemImg" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewMonan" />
 
         <TextView
             android:id="@+id/orderedItemsTittle"
@@ -207,55 +208,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/itemImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/ItemQuantityAndNameTv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orderedItemsTittle"
-            app:srcCompat="@drawable/image_onionrings" />
-
-        <TextView
-            android:id="@+id/ItemQuantityAndNameTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="1 x Mực vòng chiên giòn"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/itemImg"
-            app:layout_constraintEnd_toStartOf="@+id/itemPriceTv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/itemImg"
-            app:layout_constraintTop_toTopOf="@+id/itemImg" />
-
-        <TextView
-            android:id="@+id/itemPriceTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="45,000đ"
-            android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/ItemQuantityAndNameTv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ItemQuantityAndNameTv" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMonan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/orderedItemsTittle" />
 
         <TextView
             android:id="@+id/showMoreTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:clickable="true"
             android:text="Xem thêm"
             android:textColor="@color/grayText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grayLine2" />
+            app:layout_constraintTop_toTopOf="@+id/grayLine2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -271,7 +241,7 @@
         app:layout_constraintTop_toBottomOf="@+id/itemsLayout">
 
         <TextView
-            android:id="@+id/totaItemsTv"
+            android:id="@+id/totalItemsTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tổng cộng (2 món)"
@@ -283,7 +253,7 @@
             android:id="@+id/totaItemsPriceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="160,000đ"
+            android:text="đ"
             android:textColor="@color/grayText"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -297,7 +267,7 @@
             android:background="@color/grayDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totaItemsTv" />
+            app:layout_constraintTop_toBottomOf="@+id/totalItemsTv" />
 
         <View
             android:id="@+id/grayLine4"
@@ -342,11 +312,11 @@
             app:layout_constraintTop_toBottomOf="@+id/grayLine4" />
 
         <TextView
-            android:id="@+id/TotalPriceTv"
+            android:id="@+id/totalPriceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="175,000đ"
+            android:text="đ"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grayLine4" />
@@ -397,7 +367,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/paymentNameTv"
+            android:id="@+id/paymentMethodTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -417,7 +387,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Đặt đơn - 175,000đ"
+        android:text="Đặt đơn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
