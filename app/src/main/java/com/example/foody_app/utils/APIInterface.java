@@ -1,7 +1,5 @@
 package com.example.foody_app.utils;
 
-import com.example.foody_app.adapter.GioHangAdapter;
-import com.example.foody_app.fragments.GioHangFragment;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
 import com.example.foody_app.models.RatingModel;
@@ -10,20 +8,20 @@ import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.models.TypeFood;
 import com.example.foody_app.models.ShoppingCartModel;
 import com.example.foody_app.models.UserModel;
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Multipart;
 import retrofit2.http.PUT;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface APIInterface {
@@ -37,10 +35,18 @@ public interface APIInterface {
 
     //author: Hoàng
     //thêm sửa xóa
-    @GET("/listTheLoai")
-    Call<List<TypeFood>> getTheLoai();
+    @GET("/listTypeFood")
+    Call<Map<String, List<TypeFood>>> getTheLoai();
+
+    @Multipart
     @POST("/addFood")
-    Call<Void> addFood(@Body FoodModel foodModel);
+    Call<FoodModel> addFood(
+            @Part MultipartBody.Part anh,
+            @Part("ten") RequestBody ten,
+            @Part("giaBan") RequestBody giaBan,
+            @Part("giaGiam") RequestBody giaGiam,
+            @Part("idTheLoai") RequestBody idTheLoai
+    );
 
     // lấy thông tin nhà hàng
     @GET("/nhahang")
