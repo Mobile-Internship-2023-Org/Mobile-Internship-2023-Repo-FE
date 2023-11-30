@@ -16,6 +16,10 @@ import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,13 +89,21 @@ public class DangKyActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(DangKyActivity.this, "Đang ký thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DangKyActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     finish(); // Đóng màn hình hiện tại nếu bạn không muốn quay lại màn hình đăng nhập
-                }else {
+                } else {
                     // Xử lý khi response không thành công
-                    Toast.makeText(DangKyActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorMessage = "";
+                        if (response.errorBody() != null) {
+                            JSONObject errorObject = new JSONObject(response.errorBody().string());
+                            errorMessage = errorObject.getString("message");
+                        }
+                        Toast.makeText(DangKyActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }
 
             @Override
