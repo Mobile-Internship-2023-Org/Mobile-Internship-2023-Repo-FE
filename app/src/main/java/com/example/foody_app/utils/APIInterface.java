@@ -12,6 +12,7 @@ import com.example.foody_app.models.ShoppingCartItem;
 import com.example.foody_app.models.TypeFood;
 import com.example.foody_app.models.ShoppingCartModel;
 import com.example.foody_app.models.UserModel;
+import com.example.foody_app.models.updateResponse;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public interface APIInterface {
     @GET("/listTypeFood")
     Call<Map<String, List<TypeFood>>> getTheLoai();
 
+    // thêm món ăn
     @Multipart
     @POST("/addFood")
     Call<FoodModel> addFood(
@@ -54,6 +56,19 @@ public interface APIInterface {
             @Part("giaGiam") RequestBody giaGiam,
             @Part("idTheLoai") RequestBody idTheLoai
     );
+    @Multipart
+    @PUT("/updateFood/{idMonAn}")
+    Call<updateResponse> updateFood(
+            @Path("idMonAn") int idMonAn,
+            @Part MultipartBody.Part anh,
+            @Part("ten") RequestBody ten,
+            @Part("giaBan") RequestBody giaBan,
+            @Part("giaGiam") RequestBody giaGiam,
+            @Part("idTheLoai") RequestBody idTheLoai
+    );
+    // xóa món ăn(ẩn)
+    @PUT("/deleteFood/{idMonAn}")
+    Call<updateResponse> deleteFood(@Path("idMonAn") int idMonAn);
 
     // lấy thông tin nhà hàng
     @GET("/nhahang")
