@@ -31,6 +31,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIInterface {
     //lấy dữ liệu món ăn
@@ -56,6 +57,9 @@ public interface APIInterface {
             @Part("giaGiam") RequestBody giaGiam,
             @Part("idTheLoai") RequestBody idTheLoai
     );
+    // Tìm kiếm tên món ăn
+    @GET("/search")
+    Call<List<FoodModel>> getFoodByNameRegex(@Query("ten") String searchTerm);
     @Multipart
     @PUT("/updateFood/{idMonAn}")
     Call<updateResponse> updateFood(
