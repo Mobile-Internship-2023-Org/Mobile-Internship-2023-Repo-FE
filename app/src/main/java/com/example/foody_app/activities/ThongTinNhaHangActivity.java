@@ -1,8 +1,10 @@
 package com.example.foody_app.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +20,10 @@ import com.bumptech.glide.Glide;
 import com.example.foody_app.R;
 import com.example.foody_app.models.ErrorResponseModel;
 import com.example.foody_app.models.RestaurantModel;
+import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
+import com.example.foody_app.utils.UserModelHelper;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
@@ -52,6 +56,8 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
         apiInterface = APIClient.getInstance().create(APIInterface.class);
         getRestaurantInfo();
         pickImageFromGallery();
+        DangNhapActivity activity = new DangNhapActivity();
+        getUserData(activity.readEmailLocally(this));
     }
     private void initView(){
         myBack = (ImageView) findViewById(R.id.myBack);
@@ -254,4 +260,38 @@ public class ThongTinNhaHangActivity extends AppCompatActivity {
             edAddress.setText(restaurant.getDiaChi());
         }
     }
+
+    /**
+     *
+     * check role
+     */
+    private void getUserData(String email){
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
+                if(response.isSuccessful()){
+                    UserModel userModel = response.body();
+                    assert userModel != null;
+                    Log.e("TAG", "onResponse: "+userModel.getHoTen());
+                    if(userModel.getRole().equals("user")){
+                        imgShop.setOnClickListener(null);
+                        edName.setEnabled(false);
+                        edAddress.setEnabled(false);
+                        edPhoneNumber.setEnabled(false);
+                        edFanpage.setEnabled(false);
+                        btnUpdate.setVisibility(View.GONE);
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
 }
