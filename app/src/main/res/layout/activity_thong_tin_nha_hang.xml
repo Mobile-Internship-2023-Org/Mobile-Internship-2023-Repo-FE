@@ -10,19 +10,24 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/myBackToolbar"
+
         >
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/myBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/backphap"/>
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông tin khách hàng"
+            android:text="Thông tin nhà hàng"
+            android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
-    
+
     <ImageView
         android:id="@+id/imgShop"
         android:layout_width="400dp"
@@ -30,124 +35,121 @@
         android:src="@drawable/default_image"
         android:layout_gravity="center"
         />
-    <TextView
-        android:id="@+id/tvName"
+
+    <EditText
+        android:layout_marginTop="40dp"
+        android:id="@+id/edName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name shop"
-        android:textSize="24dp"
         android:layout_marginStart="16dp"
-        />
+        android:hint="Name shop"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvPhoneNumber"
+    <EditText
+        android:id="@+id/edPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:text="0123456789"
+        android:hint="0123456789"
         android:textSize="16dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/shop"
-            android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="Products:"
-            android:textSize="18dp"
-            />
-        <TextView
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="123"
-            android:layout_weight="1"
-            android:textColor="@color/pink"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/facebook1" />
 
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Fanpage:"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edFanpage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:hint="https:/www.facebook.comlocale=vi_VN"
+                android:textColor="@color/pink"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#CCCCCC"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/facebook"
-            android:layout_marginStart="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fanpage:"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            >
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/address"
+                android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:id="@+id/tvFanpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="https:/www.facebook.comlocale=vi_VN"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Address:"
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
-            android:textColor="@color/pink"
-
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        >
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/address"
-            android:layout_marginStart="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="Address:"
-            android:textSize="18dp"
-            />
-
-        <TextView
-            android:id="@+id/tvAddress"
+        <EditText
+            android:id="@+id/edAddress"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_weight=""
-            android:text="Đà nẵng"
+            android:layout_weight="1"
+            android:hint="Address"
+            android:textSize="12dp"
             android:textColor="@color/pink" />
 
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#CCCCCC"/>
     </LinearLayout>
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="32dp"
+            android:text="Update"/>
 
 </LinearLayout>

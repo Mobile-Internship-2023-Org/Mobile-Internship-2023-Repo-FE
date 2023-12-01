@@ -16,6 +16,7 @@
            app:menu="@menu/toolbar_menu"
            >
            <TextView
+               android:id="@+id/tvNguoiDung"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Hi người dùng"
@@ -47,6 +48,18 @@
                    android:textColor="#9F9F9F"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>
+       <GridView
+           android:id="@+id/grid_ds"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:numColumns="2"
+           android:layout_marginBottom="80dp"
+           android:layout_marginHorizontal="10dp"
+           android:scrollbars="none"
+           android:verticalSpacing="10dp"
+           android:horizontalSpacing="10dp"
+           android:padding="10dp"
+           android:layout_marginTop="8dp"/>
    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddFood"
