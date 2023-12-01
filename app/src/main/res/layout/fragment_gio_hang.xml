@@ -1,4 +1,3 @@
-<!-- activity_shopping_cart.xml -->
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -53,6 +52,7 @@
                 android:textStyle="bold"
                 />
             <TextView
+                android:id="@+id/txtTongTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="180000đ"

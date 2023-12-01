@@ -5,66 +5,112 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foody_app.R;
-import com.example.foody_app.models.FoodModel;
+import com.example.foody_app.models.InforModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class GioHangAdapter extends BaseAdapter {
     private Context mContext;
-    private List<FoodModel> mFoodModels;
+    private List<InforModel> mInforModel;
 
-    public GioHangAdapter(Context context, List<FoodModel> foodModels) {
+    // Variable to store the selected item position
+    private int selectedPosition = -1;
+
+    public GioHangAdapter(Context context, List<InforModel> inforModels) {
         mContext = context;
-        mFoodModels = foodModels;
+        mInforModel = inforModels;
     }
 
     @Override
     public int getCount() {
-        if(mFoodModels != null){
-            return mFoodModels.size();
-        }
-        return 0;
+        return mInforModel != null ? mInforModel.size() : 0;
     }
 
     @Override
-    public Object getItem(int i) {
-        return mFoodModels.get(i);
+    public Object getItem(int position) {
+        return mInforModel.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return mFoodModels.get(i).getIdMonAn();
+    public long getItemId(int position) {
+        return position;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
+        ImageView btnTru, btnCong;
         ImageView mImageView;
         TextView tvTen, tvGia, tvSoLuong;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
-        if(view == null){
-            view = LayoutInflater.from(mContext).inflate(R.layout.gio_hang_item_layout,viewGroup,false);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.gio_hang_item_layout, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.mImageView = view.findViewById(R.id.imgAnhFoodGH);
-            viewHolder.tvTen = view.findViewById(R.id.tvTenMonAnGH);
-            viewHolder.tvGia = view.findViewById(R.id.tvGiaMonAnGH);
-            viewHolder.tvSoLuong = view.findViewById(R.id.tvSoLuongGH);
-            view.setTag(viewHolder);
-        }else{
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder.mImageView = convertView.findViewById(R.id.imgAnhFoodGH);
+            viewHolder.tvTen = convertView.findViewById(R.id.tvTenMonAnGH);
+            viewHolder.tvGia = convertView.findViewById(R.id.tvGiaMonAnGH);
+            viewHolder.tvSoLuong = convertView.findViewById(R.id.tvsoluong);
+            viewHolder.btnCong = convertView.findViewById(R.id.btncong);
+            viewHolder.btnTru = convertView.findViewById(R.id.btntru);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.mImageView.setImageResource(R.drawable.image);
-        viewHolder.tvTen.setText(mFoodModels.get(i).getTen());
-        viewHolder.tvGia.setText(mFoodModels.get(i).getGiaBan()+"");
-        viewHolder.tvSoLuong.setText(2+"");
-        return view;
+        final InforModel currentItem = mInforModel.get(position);
+
+        Picasso.get().load(currentItem.getAnh()).into(viewHolder.mImageView);
+        viewHolder.tvTen.setText(currentItem.getTen());
+        viewHolder.tvGia.setText(currentItem.getGiaBan() + "");
+        viewHolder.tvSoLuong.setText(currentItem.getSoLuong() + "");
+
+        // Highlight the selected item
+        convertView.setBackgroundResource(selectedPosition == position ? R.color.selected_item_color : android.R.color.transparent);
+
+        viewHolder.btnCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increase the quantity
+                currentItem.setSoLuong(currentItem.getSoLuong() + 1);
+
+                // Notify the adapter that the data has changed
+                notifyDataSetChanged();
+            }
+        });
+
+        viewHolder.btnTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Decrease the quantity only if it's greater than 1
+                if (currentItem.getSoLuong() > 1) {
+                    currentItem.setSoLuong(currentItem.getSoLuong() - 1);
+
+                    // Notify the adapter that the data has changed
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
+        // Set click listener for the whole item to highlight it
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Update the selected position and highlight the item
+                selectedPosition = position;
+
+            }
+        });
+
+        return convertView;
     }
 }
-
