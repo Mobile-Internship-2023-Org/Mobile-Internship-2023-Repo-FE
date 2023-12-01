@@ -28,6 +28,7 @@ import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 import com.example.foody_app.utils.OnDiaChiChangedListener;
 import com.example.foody_app.utils.OnThanhToanChangedListener;
+import com.example.foody_app.utils.UserModelHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -163,27 +164,21 @@ public class XacNhanDonHangActivity extends AppCompatActivity
     }
 
     private void getNguoidungInfo(String email) {
-        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
-        Call<UserModel> call = apiInterface.getNguoidungByEmail(email);
-        call.enqueue(new Callback<UserModel>() {
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                if (response.isSuccessful()) {
-                    UserModel nguoidung = response.body();
-                    if (nguoidung != null) {
-                        // Save nguoidung information to shared preferences
-                        saveNguoidungInfoLocally(nguoidung);
+                UserModel nguoidung = response.body();
+                if (nguoidung != null) {
+                    // Save nguoidung information to shared preferences
+                    saveNguoidungInfoLocally(nguoidung);
 
-                        populateUI(nguoidung);
-                    }
-                } else {
-                    Toast.makeText(XacNhanDonHangActivity.this, "Lỗi khi lấy thông tin người dùng", Toast.LENGTH_SHORT).show();
+                    populateUI(nguoidung);
                 }
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Toast.makeText(XacNhanDonHangActivity.this, "Lỗi. Vui lòng thử lại,", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

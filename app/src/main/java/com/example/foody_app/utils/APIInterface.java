@@ -1,16 +1,18 @@
 package com.example.foody_app.utils;
 
-import com.example.foody_app.models.RePassModel;
-
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
+import com.example.foody_app.models.LichSuModel;
+import com.example.foody_app.models.MonAnModel;
 import com.example.foody_app.models.RatingModel;
+import com.example.foody_app.models.RePassModel;
 import com.example.foody_app.models.RestaurantModel;
 import com.example.foody_app.models.LoginRegisterModel;
 import com.example.foody_app.models.ShoppingCartItem;
 import com.example.foody_app.models.TypeFood;
 import com.example.foody_app.models.ShoppingCartModel;
 import com.example.foody_app.models.UserModel;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 import java.util.Map;
@@ -21,13 +23,13 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.PUT;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIInterface {
     //lấy dữ liệu món ăn
@@ -112,4 +114,17 @@ public interface APIInterface {
     Call<Void> completeGioHang(@Path("idGioHang") int idGioHang);
     @POST("/RePassController")
    Call<RePassModel> rePassModelCall(@Body RePassModel rePassModel);
+    //đổi thông tin người dùng
+    @POST("/user/{email}")
+    Call<Void> updateInfoUser(@Path("email")String email,@Body UserModel userModel);
+    @GET("/hoadon/getHoadonList/{email}")
+    Call<List<LichSuModel>> getHoaDon(@Path("email")String email);
+    @GET("hoadon/getHoadonById/{idHoaDon}")
+    Call<LichSuModel> getHoaDonById(@Path("idHoaDon")int id);
+    @GET("/hoadon/monan/{idGioHang}")
+    Call<List<MonAnModel>> getListMonAn(@Path("idGioHang") int idGioHang);
+    @PUT("/hoadon/updateTrangThai/{idHoaDon}/{trangThai}")
+    Call<Void> updateTrangThaiHoaDon(@Path("idHoaDon") int idHoaDon, @Path("trangThai") int trangthai);
+    @GET("/hoadon/getHoaDonListAll")
+    Call<List<LichSuModel>> getHoaDon();
 }
