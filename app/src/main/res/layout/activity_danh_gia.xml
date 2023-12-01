@@ -7,8 +7,20 @@
     tools:context=".activities.DanhGiaActivity"
     android:orientation="vertical"
     >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đánh giá"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
     <RatingBar
-
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,17 +28,8 @@
         android:rating="0"
         android:stepSize="1"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"/>
-
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- Add other views as needed -->
-
-    </LinearLayout>
+        android:layout_marginTop="32dp"
+    />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,30 +39,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhận xét:"
-            android:textSize="24dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp" />
-        <TextView
+        <EditText
+            android:id="@+id/edComment"
             android:layout_width="410dp"
             android:layout_height="158dp"
+            android:minLines="3"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            />
+            android:contentDescription="Enter your comment"
+            android:hint="Enter your comment"
+            android:inputType="textMultiLine"/>
+
     </LinearLayout>
 
 
     <Button
-        android:id="@+id/btnGuidanhgia"
-        android:layout_width="266dp"
-        android:layout_height="51dp"
-        android:text="Gửi đánh giá"
-        android:textSize="25dp"
-        android:background="#FF4081"
+        android:id="@+id/btnSendRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:background="#D11A58"
+        android:text="Gửi đánh giá"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bỏ qua"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
-

@@ -1,5 +1,7 @@
 package com.example.foody_app.adapter;
 
+import static com.example.foody_app.activities.ChiTietMonAnActivity.currencyFormat;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,12 @@ import android.widget.TextView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.models.FoodModel;
+import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class FoodAdapter extends BaseAdapter{
     private Context mContext;
@@ -59,9 +65,9 @@ public class FoodAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.mImageView.setImageResource(R.drawable.image);
+        Picasso.get().load(mFoodModels.get(i).getAnh()).into(viewHolder.mImageView);
         viewHolder.tvTen.setText(mFoodModels.get(i).getTen());
-        viewHolder.tvGia.setText(mFoodModels.get(i).getGiaBan()+"");
+        viewHolder.tvGia.setText(currencyFormat(mFoodModels.get(i).getGiaBan()+"") +"đ");
 
         return view;
     }

@@ -1,0 +1,274 @@
+[33mcommit f01bc2bd5c50576a6c8ec9350ba353e7fdc265b3[m[33m ([m[1;36mHEAD -> [m[1;32mtrongdg[m[33m)[m
+Merge: 4564932 d6efd23
+Author: TrongDG <doantrong100@gmail.com>
+Date:   Thu Nov 16 11:01:22 2023 +0700
+
+    Merge branch 'main' into trongdg
+
+[33mcommit d6efd23bb03fc819832b8688c000012a7f6b8b8c[m
+Merge: 1fc1c78 9ad9c28
+Author: Phapdn <106089682+PhapDang3@users.noreply.github.com>
+Date:   Thu Nov 16 10:54:50 2023 +0700
+
+    Merge pull request #14 from Mobile-Internship-2023-Org/phapdv
+    
+    Phapdv
+
+[33mcommit 45649323be15c2d6f2c8d79ec8fd1ee7d45212a6[m
+Author: TrongDG <doantrong100@gmail.com>
+Date:   Thu Nov 16 10:51:30 2023 +0700
+
+    Test commit 2.
+
+[33mcommit 2b2b37fb158192239be9128d1f6abb6268760ec5[m
+Author: TrongDG <doantrong100@gmail.com>
+Date:   Thu Nov 16 10:50:39 2023 +0700
+
+    Test commit.
+
+[33mcommit 9ad9c287f31cc2678ed11b64ae8082484e29ad37[m
+Merge: 9ce925f a6299af
+Author: Phapdn <106089682+PhapDang3@users.noreply.github.com>
+Date:   Thu Nov 16 10:50:15 2023 +0700
+
+    Merge branch 'phapdv' of https://github.com/Mobile-Internship-2023-Org/Mobile-Internship-2023-Repo-FE into phapdv
+
+[33mcommit 9ce925f14aec7d82ff4a222228f8c5a47e36d1c8[m
+Author: Phapdn <106089682+PhapDang3@users.noreply.github.com>
+Date:   Thu Nov 16 10:48:12 2023 +0700
+
+    Thêm layout thông tin khách hàng
+
+[33mcommit 1fc1c78ecc5d39170794dd4d204f7a1e18e43127[m[33m ([m[1;31morigin/trongdv[m[33m)[m
+Merge: 8ffec43 6743ed7
+Author: Deviinn <130461475+Deviinn@users.noreply.github.com>
+Date:   Thu Nov 16 10:28:26 2023 +0700
+
+    Merge pull request #13 from Deviinn/Lap
+    
+    Lap commit
+
+[33mcommit 6743ed7d75d6326852570d09dd7ffec30b9e0040[m
+Merge: f83bee0 b5a2f29
+Author: PhamTienThanh26 <147700324+phamtienthanh26@users.noreply.github.com>
+Date:   Tue Nov 14 15:06:51 2023 +0700
+
+    Lap commit
+
+[33mcommit 8ffec43791a2dcdac6eaac1f62e34b255cd4a83f[m
+Merge: ea40bba a6299af
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Thu Nov 16 09:59:19 2023 +0700
+
+    Merge pull request #8 from Mobile-Internship-2023-Org/phapdv
+    
+    add xml thongtinkhachhang
+
+[33mcommit a6299afc5d923ff6b165dcdbd766046655d7d5ef[m
+Merge: 199c575 ea40bba
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Thu Nov 16 09:58:36 2023 +0700
+
+    Merge branch 'main' into phapdv
+
+[33mcommit ea40bba81312369239a3b2c1d4e71303edd193ec[m[33m ([m[1;31morigin/hoangnt[m[33m)[m
+Merge: 8712538 669cc5f
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Thu Nov 16 09:48:39 2023 +0700
+
+    Merge pull request #12 from Mobile-Internship-2023-Org/PhanCongQuoc
+    
+    dang nhap qua man hinh main
+
+[33mcommit 669cc5f8cd599a40bfcd0427c65f703300fdda0a[m[33m ([m[1;31morigin/PhanCongQuoc[m[33m)[m
+Author: quockag63 <pquoc6108@gmail.com>
+Date:   Thu Nov 16 09:39:52 2023 +0700
+
+    dang nhap qua man hinh main
+
+[33mcommit 8712538d559c8145e3aef0ea2327c14d4f3dcac8[m
+Merge: 666fe29 49294b6
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Thu Nov 16 09:31:54 2023 +0700
+
+    Merge pull request #11 from Mobile-Internship-2023-Org/PhanCongQuoc
+    
+    man hinh dang ki, dang nhap
+
+[33mcommit 666fe294e8d5a27c03714a5752643e0bed8f1a2f[m
+Merge: 7f3b9c3 5e7dada
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Thu Nov 16 09:28:57 2023 +0700
+
+    Merge pull request #10 from Mobile-Internship-2023-Org/doannv
+    
+    doan commit 16-11
+
+[33mcommit 5e7dadaa95adb6806ede0c62cae2eb9e6f22bd8b[m[33m ([m[1;31morigin/doannv[m[33m)[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Thu Nov 16 09:27:58 2023 +0700
+
+    doan commit 16-11
+
+[33mcommit 7f3b9c372dc79163e2f4fd0c0d4cbc364afedbff[m
+Merge: 9ba2ffd 66beb3f
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Thu Nov 16 09:26:25 2023 +0700
+
+    Merge pull request #9 from Mobile-Internship-2023-Org/trongdg
+    
+    Add header.
+
+[33mcommit 49294b687656ba3fed1250c7fbcb50e2aeef3cac[m
+Author: quockag63 <pquoc6108@gmail.com>
+Date:   Thu Nov 16 08:38:11 2023 +0700
+
+    man hinh dang ki, dang nhap
+
+[33mcommit 199c5754bfbd0415063b458949ffa7fa04fa6c29[m
+Author: Phapdn <106089682+PhapDang3@users.noreply.github.com>
+Date:   Tue Nov 14 23:34:36 2023 +0700
+
+    add xml thongtinkhachhang
+
+[33mcommit 66beb3f9ad86b5ae35a445084ca2e8dff06edd27[m[33m ([m[1;31morigin/trongdg[m[33m)[m
+Author: TrongDG <doantrong100@gmail.com>
+Date:   Tue Nov 14 23:25:45 2023 +0700
+
+    Add header.
+
+[33mcommit 9ba2ffdac6123ea84710547ed60e961986adc27b[m[33m ([m[1;31morigin/qunhngaa[m[33m)[m
+Merge: f83bee0 b5a2f29
+Author: PhamTienThanh26 <147700324+PhamTienThanh26@users.noreply.github.com>
+Date:   Tue Nov 14 15:06:51 2023 +0700
+
+    Merge pull request #7 from Mobile-Internship-2023-Org/ThanhPT2
+    
+    test
+
+[33mcommit b5a2f29c7331dc13687897e4eebd9e4fec306826[m[33m ([m[1;31morigin/ThanhPT2[m[33m)[m
+Author: PhamTienThanh26 <phamtienthanh2611ptt@gmail.com>
+Date:   Tue Nov 14 15:03:06 2023 +0700
+
+    test
+
+[33mcommit f83bee0cb0c8f189f282e139cc04d3f25e2c8226[m
+Merge: 2a9210d e4112b2
+Author: quockag63 <103013486+quytdeptrai@users.noreply.github.com>
+Date:   Tue Nov 14 14:43:49 2023 +0700
+
+    Merge pull request #6 from Mobile-Internship-2023-Org/PhanCongQuoc
+    
+    man hinh chao
+
+[33mcommit e4112b256a72c1529de0bb64158a5e30e7e9117c[m
+Author: Phan cong Quoc <pquoc6108@gmail.com>
+Date:   Tue Nov 14 14:37:51 2023 +0700
+
+    man hinh chao
+
+[33mcommit 2a9210daf51c6a22a233d318a929a339f41c1116[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Mon Nov 13 23:39:49 2023 +0700
+
+    a
+
+[33mcommit 87f71381240904a75374e09a1e1af115f480186c[m
+Merge: fca64d7 1b14597
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Mon Nov 13 23:31:10 2023 +0700
+
+    Merge pull request #5 from Mobile-Internship-2023-Org/doannv
+    
+    Doannv
+
+[33mcommit 1b14597c432837531b47b279b2a15500c61f5bb7[m
+Merge: bd46830 fca64d7
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Mon Nov 13 23:31:03 2023 +0700
+
+    Merge branch 'main' into doannv
+
+[33mcommit bd4683020dfe65769dbbfee2c192e7b05f8b2567[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Mon Nov 13 23:21:47 2023 +0700
+
+    commit
+
+[33mcommit 3b14b51ab32b7aa7e15772c4c0a907fbcc38788b[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Mon Nov 13 23:21:28 2023 +0700
+
+    commit
+
+[33mcommit fca64d7c47a16b411c4f237c08ed61e073c2a271[m
+Merge: ac8c361 bc224ae
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Mon Nov 13 22:54:13 2023 +0700
+
+    Merge pull request #3 from Mobile-Internship-2023-Org/phapdv
+    
+    import colors
+
+[33mcommit ac8c361b8b65002a944c3317c7b0cd929d29181a[m
+Merge: e3b2f51 99eb30e
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Mon Nov 13 22:49:57 2023 +0700
+
+    Merge pull request #4 from Mobile-Internship-2023-Org/doannv
+    
+    doan commit 13-11
+
+[33mcommit 99eb30ee90cb81c9b49f7eb62db3dcc052907a9e[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Mon Nov 13 22:48:30 2023 +0700
+
+    doan commit 13-11
+
+[33mcommit e3b2f5151562d1489aa4327abd42135a7b02bd78[m
+Merge: 2f380d0 4e6d3fa
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Sun Nov 12 22:01:28 2023 +0700
+
+    Merge pull request #2 from Mobile-Internship-2023-Org/doannv
+    
+    doan test commit
+
+[33mcommit 4e6d3fa55046d4ae6edeb3daaef33b8dce2efa54[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Sun Nov 12 21:57:13 2023 +0700
+
+    doan test commit
+
+[33mcommit 2f380d0b08c3e640b493e83f1f9bbeac85caf584[m
+Merge: 099141a 9b20bee
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Sun Nov 12 21:54:20 2023 +0700
+
+    Merge pull request #1 from Mobile-Internship-2023-Org/doannv
+    
+    doan test commit
+
+[33mcommit 9b20beec0516cf3b57ad061b05b9853fff250139[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Sun Nov 12 21:46:53 2023 +0700
+
+    doan test commit
+
+[33mcommit bc224aecf47ac0370995825ecc061172cdde5c63[m
+Author: Phapdn <106089682+PhapDang3@users.noreply.github.com>
+Date:   Sun Nov 12 21:28:25 2023 +0700
+
+    import colors
+
+[33mcommit 099141abe182b427e0ffa6b7a5b84ca68aa7cd53[m
+Author: DoannNguyen <nguyendoan27022001@gmail.com>
+Date:   Sun Nov 12 20:25:41 2023 +0700
+
+    init layout project
+
+[33mcommit 164a335a2157c99161439a6666ace1fd12c0c891[m
+Author: DoannNguyen <116294271+DoannNguyen@users.noreply.github.com>
+Date:   Sun Nov 12 17:34:20 2023 +0700
+
+    Initial commit
