@@ -52,7 +52,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     private ShoppingCartModel mShoppingCartModel = new ShoppingCartModel();
     private List<RatingModel> mRatingModels = new ArrayList<>();
     private RatingAdapter mRatingAdapter;
-    private ListView lvDanhGia;
+    private RecyclerView lvDanhGia;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -66,7 +66,9 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
         getUserData(activity.readEmailLocally(ChiTietMonAnActivity.this));
         mRatingAdapter = new RatingAdapter(ChiTietMonAnActivity.this,mRatingModels);
         getRating();
+
         lvDanhGia.setAdapter(mRatingAdapter);
+        lvDanhGia.setLayoutManager(new LinearLayoutManager(ChiTietMonAnActivity.this));
         long id = getIntent().getLongExtra("idFood", -1);
         Integer type = getIntent().getIntExtra("idType",-1);
         tvSoLuong.setText(1+"");
