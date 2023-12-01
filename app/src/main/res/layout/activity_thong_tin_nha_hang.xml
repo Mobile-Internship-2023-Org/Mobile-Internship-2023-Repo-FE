@@ -30,11 +30,11 @@
 
     <ImageView
         android:id="@+id/imgShop"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
-        android:src="@drawable/default_image"
         android:layout_gravity="center"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/default_image" />
 
     <EditText
         android:layout_marginTop="40dp"
@@ -44,6 +44,7 @@
         android:layout_marginStart="16dp"
         android:hint="Name shop"
         android:textSize="24dp"
+        android:textColor="@color/pink"
         android:textStyle="bold" />
 
     <EditText
@@ -53,7 +54,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:hint="0123456789"
+        android:textColor="@color/pink"
         android:textSize="16dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
