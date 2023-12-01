@@ -62,7 +62,7 @@ public interface APIInterface {
     );
     // xóa món ăn(ẩn)
     @PUT("/deleteFood/{idMonAn}")
-    Call<updateResponse> deleteFood(@Path("idMonAn") int idMonAn, @Body RequestBody body);
+    Call<updateResponse> deleteFood(@Path("idMonAn") int idMonAn);
 
     // lấy thông tin nhà hàng
     @GET("/nhahang")

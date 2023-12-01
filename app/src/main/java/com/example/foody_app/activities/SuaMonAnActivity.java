@@ -1,6 +1,7 @@
 package com.example.foody_app.activities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.foody_app.MainActivity;
 import com.example.foody_app.R;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.TypeFood;
@@ -69,12 +71,52 @@ public class SuaMonAnActivity extends AppCompatActivity {
         //handle button back with toolbar
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
+        // hiển thị loại lên autoCompleTextView
         loadTheLoai();
 
+        // nút thêm
         btnAddFood.setOnClickListener(view -> updateFood());
-//        btnDelete.setOnClickListener(view -> deleteFood());
+
+        // nút xóa
+        btnDelete.setOnClickListener(view -> diaLogConfirmDelet());
     }
 
+    // dialog xác nhận xóa
+    public void diaLogConfirmDelet(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn chắc chắn muốn xóa?");
+        builder.setPositiveButton("Có", (dialog, which) -> deleteFood());
+        builder.setNegativeButton("Không", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+    // xử lý xóa món ăn theo id (ẩn)
+    private void deleteFood(){
+        // gọi idMonAn từ ChiTietMonAn
+        int idMonAn = getIntent().getIntExtra("idMonAn", -1);
+
+        // gọi api xử lý xóa
+        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+        Call<updateResponse> call = apiInterface.deleteFood(idMonAn);
+
+        call.enqueue(new Callback<updateResponse>() {
+            @Override
+            public void onResponse(Call<updateResponse> call, Response<updateResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(SuaMonAnActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SuaMonAnActivity.this, MainActivity.class));
+                }else {
+                    Toast.makeText(SuaMonAnActivity.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<updateResponse> call, Throwable t) {
+                Toast.makeText(SuaMonAnActivity.this, "Id món ăn không tồn tại", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // xử lý cập nhật món ăn
     private void updateFood() {
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
 
@@ -82,12 +124,10 @@ public class SuaMonAnActivity extends AppCompatActivity {
         String giaBan = Objects.requireNonNull(edtPrice.getText()).toString();
         String giaGiam = Objects.requireNonNull(edtPriceReduced.getText()).toString();
 
-//        truyền id vào theLoai
+        // truyền id vào theLoai
         String theLoai = Objects.requireNonNull(autoCompleteTxt.getText()).toString();
         int idTheLoai = idTypeMap.get(theLoai);
         int idMonAn = getIntent().getIntExtra("idMonAn", -1);
-        Log.i("updateFood", "try to get id: " + autoCompleteTxt.getText());
-        Log.i("updateFood", "try to get id: " + idTypeMap);
 
         // Tạo RequestBody cho các trường
         RequestBody tenRequestBody = RequestBody.create(MediaType.parse("text/plain"), ten);
@@ -95,6 +135,7 @@ public class SuaMonAnActivity extends AppCompatActivity {
         RequestBody giaGiamRequestBody = RequestBody.create(MediaType.parse("text/plain"), giaGiam);
         RequestBody theLoaiRequestBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(idTheLoai));
 
+        // mặc định filePart là null nếu không cập nhật "anh"
         MultipartBody.Part filePart = null;
 
         // Kiểm tra nếu đã chọn ảnh mới
@@ -130,32 +171,7 @@ public class SuaMonAnActivity extends AppCompatActivity {
         });
     }
 
-//    private void deleteFood(){
-//        APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
-//
-//        int idMonAn = getIntent().getIntExtra("idMonAn", -1);
-//
-//        RequestBody emptyBody = RequestBody.create(MediaType.parse("text/plain"), "");
-//        Call<updateResponse> call = apiInterface.deleteFood(idMonAn, emptyBody);
-//        call.enqueue(new Callback<updateResponse>() {
-//            @Override
-//            public void onResponse(Call<updateResponse> call, Response<updateResponse> response) {
-//                if (response.isSuccessful()) {
-//                    Toast.makeText(SuaMonAnActivity.this, "Xóa món ăn thành công", Toast.LENGTH_SHORT).show();
-//                    finish(); // Kết thúc activity sau khi ẩn thành công
-//                } else {
-//                    Log.d("delete", response.message());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<updateResponse> call, Throwable t) {
-//                Toast.makeText(SuaMonAnActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
-
+    // xử lý lý truyền idTheLoai
     private void setAutoCompleteTextById(int typeId) {
         if (idTypeMap != null) {
             for (Map.Entry<String, Integer> entry : idTypeMap.entrySet()) {
@@ -171,7 +187,9 @@ public class SuaMonAnActivity extends AppCompatActivity {
         }
     }
 
+    // xử lý hiển thị loại món ăn
     private void loadTheLoai() {
+        // goi api lấy thể loại món ăn
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<Map<String, List<TypeFood>>> call = apiInterface.getTheLoai();
         call.enqueue(new Callback<Map<String, List<TypeFood>>>() {
@@ -179,7 +197,7 @@ public class SuaMonAnActivity extends AppCompatActivity {
             public void onResponse(Call<Map<String, List<TypeFood>>> call, Response<Map<String, List<TypeFood>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Map<String, List<TypeFood>> responseData = response.body();
-                    List<TypeFood> typeFoods = responseData.get("types");
+                    List<TypeFood> typeFoods = responseData.get("types"); // lấy data của types
 
                     List<String> tenTheLoai = new ArrayList<>();
 
@@ -207,8 +225,6 @@ public class SuaMonAnActivity extends AppCompatActivity {
                         Picasso.get().load(anh).into(imgFood);
                     }
 
-                    Log.d("LoadTheLoai", "tenTheLoai: " + tenTheLoai);
-                    Log.d("LoadTheLoai", "idTypeMap: " + idTypeMap);
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(SuaMonAnActivity.this, R.layout.custom_dropdown_item, R.id.customItemText, tenTheLoai);
                     autoCompleteTxt.setAdapter(adapter);
                 }
@@ -221,6 +237,7 @@ public class SuaMonAnActivity extends AppCompatActivity {
         });
     }
 
+    // lấy đường dẫn từ uri
     private String getRealPathFromURI(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
