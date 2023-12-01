@@ -1,5 +1,7 @@
 package com.example.foody_app.utils;
 
+import com.example.foody_app.models.RePassModel;
+
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.InforModel;
 import com.example.foody_app.models.RatingModel;
@@ -77,4 +79,7 @@ public interface APIInterface {
     //lấy đánh giá của người dùng
     @GET("/rating")
     Call<List<RatingModel>> getRating();
+  
+    @POST("/RePassController")
+   Call<RePassModel> rePassModelCall(@Body RePassModel rePassModel);
 }
