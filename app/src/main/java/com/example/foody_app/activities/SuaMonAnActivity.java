@@ -45,6 +45,12 @@ import retrofit2.Response;
 
 public class SuaMonAnActivity extends AppCompatActivity {
 
+    /*
+    * Author: Hoàng
+    * Date: 01/12/2023
+    * xử lý sửa và xóa món ăn
+     */
+
     AutoCompleteTextView autoCompleteTxt;
     ImageView imgFood;
     TextInputEditText edtNameFood, edtPrice, edtPriceReduced;
