@@ -1,6 +1,9 @@
 package com.example.foody_app.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,19 +11,33 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foody_app.R;
+import com.example.foody_app.fragments.GioHangFragment;
 import com.example.foody_app.models.InforModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class GioHangAdapter extends BaseAdapter {
+    private OnQuantityChangeListener quantityChangeListener;
+    private GioHangFragment gioHangFragment, updatetotal;
     private Context mContext;
     private List<InforModel> mInforModel;
 
+
     // Variable to store the selected item position
     private int selectedPosition = -1;
+
+    public interface OnQuantityChangeListener {
+        void onQuantityChanged();
+    }
+
+    public void setQuantityChangeListener(OnQuantityChangeListener listener) {
+        this.quantityChangeListener = listener;
+    }
+
 
     public GioHangAdapter(Context context, List<InforModel> inforModels) {
         mContext = context;
@@ -59,8 +76,7 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.tvTen = convertView.findViewById(R.id.tvTenMonAnGH);
             viewHolder.tvGia = convertView.findViewById(R.id.tvGiaMonAnGH);
             viewHolder.tvSoLuong = convertView.findViewById(R.id.tvsoluong);
-            viewHolder.btnCong = convertView.findViewById(R.id.btncong);
-            viewHolder.btnTru = convertView.findViewById(R.id.btntru);
+
 
             convertView.setTag(viewHolder);
         } else {
@@ -77,29 +93,7 @@ public class GioHangAdapter extends BaseAdapter {
         // Highlight the selected item
         convertView.setBackgroundResource(selectedPosition == position ? R.color.selected_item_color : android.R.color.transparent);
 
-        viewHolder.btnCong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Increase the quantity
-                currentItem.setSoLuong(currentItem.getSoLuong() + 1);
 
-                // Notify the adapter that the data has changed
-                notifyDataSetChanged();
-            }
-        });
-
-        viewHolder.btnTru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Decrease the quantity only if it's greater than 1
-                if (currentItem.getSoLuong() > 1) {
-                    currentItem.setSoLuong(currentItem.getSoLuong() - 1);
-
-                    // Notify the adapter that the data has changed
-                    notifyDataSetChanged();
-                }
-            }
-        });
 
         // Set click listener for the whole item to highlight it
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -113,4 +107,10 @@ public class GioHangAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    private void showToast(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+
 }
