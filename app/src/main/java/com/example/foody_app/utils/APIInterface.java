@@ -82,4 +82,5 @@ public interface APIInterface {
 
     @POST("/RePassController/{userId}")
     Call<RePassModel> rePassModelCall(@Path("userId") RePassModel userId);
+
 }

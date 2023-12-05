@@ -56,7 +56,6 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             Toast.makeText(this, "Mật khẩu phải bao gồm chữ cái, chữ số và ký tự đặc biệt", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (!newPassword.equals(confirmPassword)) {
             Toast.makeText(this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             return;

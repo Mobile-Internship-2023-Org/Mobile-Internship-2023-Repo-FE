@@ -5,6 +5,7 @@ public class RePassModel {
     private String currentPassword;
     private String newPassword;
 
+
     public RePassModel() {
     }
 
