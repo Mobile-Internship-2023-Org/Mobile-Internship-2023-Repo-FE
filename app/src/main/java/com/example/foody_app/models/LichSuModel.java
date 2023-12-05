@@ -1,51 +1,41 @@
 package com.example.foody_app.models;
 
 public class LichSuModel {
-    private int idMonAn;
-    private String anh;
-    private String tenMonAn;
+    private int idHoaDon;
+    private String ngayDat;
     private String diaChi;
-    private String loai;
-    private float gia;
-    private int soLuong;
-    private int trangThai;
+    private String  trangThai;
+    private int  tongTienHoaDon;
+    private String phuongThucTT;
+    private int idGioHang;
+    private String hoTen;
+    private String sdt;
 
-    public LichSuModel(int idMonAn, String anh, String tenMonAn, String diaChi, String loai, float gia, int soLuong, int trangThai) {
-        this.idMonAn = idMonAn;
-        this.anh = anh;
-        this.tenMonAn = tenMonAn;
-        this.diaChi = diaChi;
-        this.loai = loai;
-        this.gia = gia;
-        this.soLuong = soLuong;
-        this.trangThai = trangThai;
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
 
     public LichSuModel() {
     }
 
-    public int getIdMonAn() {
-        return idMonAn;
+    public int getIdHoaDon() {
+        return idHoaDon;
     }
 
-    public void setIdMonAn(int idMonAn) {
-        this.idMonAn = idMonAn;
-    }
-
-    public String getAnh() {
-        return anh;
-    }
-
-    public void setAnh(String anh) {
-        this.anh = anh;
-    }
-
-    public String getTenMonAn() {
-        return tenMonAn;
-    }
-
-    public void setTenMonAn(String tenMonAn) {
-        this.tenMonAn = tenMonAn;
+    public void setIdHoaDon(int idHoaDon) {
+        this.idHoaDon = idHoaDon;
     }
 
     public String getDiaChi() {
@@ -56,35 +46,43 @@ public class LichSuModel {
         this.diaChi = diaChi;
     }
 
-    public String getLoai() {
-        return loai;
+    public String getNgayDat() {
+        return ngayDat;
     }
 
-    public void setLoai(String loai) {
-        this.loai = loai;
+    public void setNgayDat(String ngayDat) {
+        this.ngayDat = ngayDat;
     }
 
-    public float getGia() {
-        return gia;
-    }
-
-    public void setGia(float gia) {
-        this.gia = gia;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public int getTrangThai() {
+    public String getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public int getTongTienHoaDon() {
+        return tongTienHoaDon;
+    }
+
+    public void setTongTienHoaDon(int tongTienHoaDon) {
+        this.tongTienHoaDon = tongTienHoaDon;
+    }
+
+    public String getPhuongThucTT() {
+        return phuongThucTT;
+    }
+
+    public void setPhuongThucTT(String phuongThucTT) {
+        this.phuongThucTT = phuongThucTT;
+    }
+
+    public int getIdGioHang() {
+        return idGioHang;
+    }
+
+    public void setIdGioHang(int idGioHang) {
+        this.idGioHang = idGioHang;
     }
 }
