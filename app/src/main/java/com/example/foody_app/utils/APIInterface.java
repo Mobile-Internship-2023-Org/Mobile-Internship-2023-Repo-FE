@@ -79,7 +79,7 @@ public interface APIInterface {
     //lấy đánh giá của người dùng
     @GET("/rating")
     Call<List<RatingModel>> getRating();
-  
-    @POST("/RePassController")
-   Call<RePassModel> rePassModelCall(@Body RePassModel rePassModel);
+
+    @POST("/RePassController/{userId}")
+    Call<RePassModel> rePassModelCall(@Path("userId") RePassModel userId);
 }

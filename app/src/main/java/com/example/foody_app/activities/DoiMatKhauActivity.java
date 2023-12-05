@@ -14,7 +14,6 @@ import com.example.foody_app.models.RePassModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
 
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,18 +42,8 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         String newPassword = edtNewPassword.getText().toString().trim();
         String confirmPassword = edtConfirmPassword.getText().toString().trim();
 
-        if (TextUtils.isEmpty(currentPassword)) {
-            Toast.makeText(this, "Vui lòng nhập mật khẩu hiện tại", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(newPassword)) {
-            Toast.makeText(this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(this, "Vui lòng nhập xác nhận mật khẩu", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(currentPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword)) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -73,9 +62,12 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             return;
         }
 
+        // Lấy thông tin từ người dùng nhập vào
+        // Đây là nơi bạn cần có cách xác định userIdToUpdate (ID của người dùng cần thay đổi mật khẩu)
+        String userIdToUpdate = "1"; // Thay thế bằng ID của người dùng cần thay đổi mật khẩu
+        RePassModel rePassModel = new RePassModel(userIdToUpdate, currentPassword, newPassword);
 
         // Call API to change password
-        RePassModel rePassModel = new RePassModel();
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<RePassModel> call = apiInterface.rePassModelCall(rePassModel);
 
@@ -97,29 +89,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             }
         });
     }
-    //        call.enqueue(new Callback<RePassModel>() {
-    //            @Override
-    //            public void onResponse(Call<DoiMatKhauModel> call, Response<DoiMatKhauModel> response) {
-    //                if (response.isSuccessful()) {
-    //                    Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-    //                    finish();
-    //                } else {
-    //                    Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
-    //                }
-    //            }
-    //
-    //            @Override
-    //            public void onFailure(Call<DoiMatKhauModel> call, Throwable t) {
-    //                Toast.makeText(DoiMatKhauActivity.this, "Có lỗi xảy ra khi đổi mật khẩu", Toast.LENGTH_SHORT).show();
-    //                t.printStackTrace();
-    //            }
-    //        });
-    //    }
 
     private void initView() {
         edtCurrentPassword = findViewById(R.id.edt_current_password);
         edtNewPassword = findViewById(R.id.edt_new_password);
         edtConfirmPassword = findViewById(R.id.edt_confirm_password);
+        btnDoiMatKhau = findViewById(R.id.btn_doi_mat_khau);
     }
 }
-
