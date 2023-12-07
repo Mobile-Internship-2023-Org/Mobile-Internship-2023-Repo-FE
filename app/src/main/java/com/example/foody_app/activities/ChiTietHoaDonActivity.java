@@ -122,7 +122,7 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
                     tvDiaChi.setText("Địa chỉ: "+model.getDiaChi());
                     tvTen.setText("Họ tên: "+model.getHoTen());
                     tvNgayDat.setText("Ngày đặt: "+model.getNgayDat());
-                    tvTongTien.setText(""+model.getTongTienHoaDon());
+                    tvTongTien.setText(ChiTietMonAnActivity.currencyFormat(""+model.getTongTienHoaDon())+"đ");
                     if(trangThai.equals("Đã hoàn thành") || trangThai.equals("Hủy đơn")){
                         btnHuy1.setVisibility(View.GONE);
                         btnHuy2.setVisibility(View.GONE);

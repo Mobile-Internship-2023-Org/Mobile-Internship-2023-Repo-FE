@@ -1,7 +1,7 @@
 package com.example.foody_app.models;
 
 public class RePassModel {
-    private String userId;
+    private int userId;
     private String currentPassword;
     private String newPassword;
 
@@ -9,17 +9,17 @@ public class RePassModel {
     public RePassModel() {
     }
 
-    public RePassModel(String userId, String currentPassword, String newPassword) {
+    public RePassModel(int userId, String currentPassword, String newPassword) {
         this.userId = userId;
         this.currentPassword = currentPassword;
         this.newPassword = newPassword;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

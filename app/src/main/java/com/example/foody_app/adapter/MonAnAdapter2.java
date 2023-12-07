@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.ChiTietMonAnActivity;
 import com.example.foody_app.models.MonAnModel;
 
 import java.util.List;
@@ -57,9 +58,9 @@ public class MonAnAdapter2 extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.tvTen.setText("-"+mList.get(i).getTen());
-        viewHolder.tvGia.setText("Gía bán: "+mList.get(i).getGiaBan()+"đ");
-        viewHolder.tvSoLuong.setText("Số lượng: "+mList.get(i).getSoLuong()+"x");
+        viewHolder.tvTen.setText("- "+mList.get(i).getTen());
+        viewHolder.tvGia.setText("Gía bán: "+ ChiTietMonAnActivity.currencyFormat(mList.get(i).getGiaBan()+"")+"đ");
+        viewHolder.tvSoLuong.setText("Số lượng: "+mList.get(i).getSoLuong());
         return view;
     }
 }

@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import com.example.foody_app.R;
 import com.example.foody_app.models.RePassModel;
+import com.example.foody_app.models.UserModel;
 import com.example.foody_app.utils.APIClient;
 import com.example.foody_app.utils.APIInterface;
+import com.example.foody_app.utils.UserModelHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,12 +24,14 @@ public class DoiMatKhauActivity extends AppCompatActivity {
 
     private EditText edtCurrentPassword, edtNewPassword, edtConfirmPassword;
     private Button btnDoiMatKhau;
+    private int userIdToUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doi_mat_khau);
         initView();
+        getUser(new DangNhapActivity().readEmailLocally(DoiMatKhauActivity.this));
 
         btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,23 +51,21 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             return;
         }
 
-        if (newPassword.length() < 6) {
-            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*#?&]).+$")) {
-            Toast.makeText(this, "Mật khẩu phải bao gồm chữ cái, chữ số và ký tự đặc biệt", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (newPassword.length() < 6) {
+//            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        if (!newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*#?&]).+$")) {
+//            Toast.makeText(this, "Mật khẩu phải bao gồm chữ cái, chữ số và ký tự đặc biệt", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         if (!newPassword.equals(confirmPassword)) {
             Toast.makeText(this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Lấy thông tin từ người dùng nhập vào
-        // Đây là nơi bạn cần có cách xác định userIdToUpdate (ID của người dùng cần thay đổi mật khẩu)
-        String userIdToUpdate = "1"; // Thay thế bằng ID của người dùng cần thay đổi mật khẩu
+
         RePassModel rePassModel = new RePassModel(userIdToUpdate, currentPassword, newPassword);
 
         // Call API to change password
@@ -94,5 +96,18 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         edtNewPassword = findViewById(R.id.edt_new_password);
         edtConfirmPassword = findViewById(R.id.edt_confirm_password);
         btnDoiMatKhau = findViewById(R.id.btn_doi_mat_khau);
+    }
+    private void getUser(String email){
+        UserModelHelper.getInstance().getUserByEmail(email, new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                userIdToUpdate = response.body().getIdNguoiDung();
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
+            }
+        });
     }
 }

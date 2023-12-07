@@ -1,8 +1,10 @@
 package com.example.foody_app.models;
 
+import java.util.Date;
+
 public class LichSuModel {
     private int idHoaDon;
-    private String ngayDat;
+    private Date ngayDat;
     private String diaChi;
     private String  trangThai;
     private int  tongTienHoaDon;
@@ -46,11 +48,11 @@ public class LichSuModel {
         this.diaChi = diaChi;
     }
 
-    public String getNgayDat() {
+    public Date getNgayDat() {
         return ngayDat;
     }
 
-    public void setNgayDat(String ngayDat) {
+    public void setNgayDat(Date ngayDat) {
         this.ngayDat = ngayDat;
     }
 

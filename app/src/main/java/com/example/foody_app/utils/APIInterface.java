@@ -106,8 +106,8 @@ public interface APIInterface {
     @GET("/rating")
     Call<List<RatingModel>> getRating();
 
-    @POST("/RePassController/{userId}")
-    Call<RePassModel> rePassModelCall(@Path("userId") RePassModel userId);
+//    @PUT("/updatePassword/{userId}")
+//    Call<RePassModel> rePassModelCall(@Path("userId") RePassModel userId);
 
     // == Hóa đơn ==
     // Get nguoidung info by email
@@ -136,7 +136,7 @@ public interface APIInterface {
 
     @PUT("/hoadon/completeGioHang/{idGioHang}")
     Call<Void> completeGioHang(@Path("idGioHang") int idGioHang);
-    @POST("/RePassController")
+    @PUT("/updatePassword")
    Call<RePassModel> rePassModelCall(@Body RePassModel rePassModel);
     //đổi thông tin người dùng
     @POST("/user/{email}")
