@@ -11,10 +11,9 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="247dp"
+        android:layout_height="227dp"
         android:layout_margin="10dp"
-        android:src="@drawable/foodyback"
-        />
+        android:src="@drawable/foodyback" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,33 +25,55 @@
         android:layout_gravity="center"
         />
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="333dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:hint="Email"
-        android:layout_gravity="center"
-        />
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusTopStart="4dp"
+        app:boxCornerRadiusTopEnd="4dp"
+        app:boxCornerRadiusBottomStart="4dp"
+        app:boxCornerRadiusBottomEnd="4dp"
+        app:boxBackgroundColor="#FFFFFF"> <!-- Màu nền của TextInputLayout -->
 
-    <EditText
-        android:id="@+id/edtPass"
-        android:layout_width="333dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password?"
-        android:textColor="#EE5050"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="right"
-        android:layout_marginEnd="50dp"
-        />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Password"
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusTopStart="4dp"
+        app:boxCornerRadiusTopEnd="4dp"
+        app:boxCornerRadiusBottomStart="4dp"
+        app:boxCornerRadiusBottomEnd="4dp"
+        app:boxBackgroundColor="#FFFFFF"> <!-- Màu nền của TextInputLayout -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="20dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"

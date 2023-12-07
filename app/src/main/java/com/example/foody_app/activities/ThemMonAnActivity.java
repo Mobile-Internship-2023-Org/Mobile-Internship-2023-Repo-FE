@@ -41,8 +41,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThemMonAnActivity extends AppCompatActivity {
+
+    /*
+     * Author: Hoàng
+     * Date: 01/12/2023
+     * xử lý thêm món ăn
+     */
+
     AutoCompleteTextView autoCompleteTxt;
-    ArrayAdapter<String> adapterItems;
     ImageView imgFood;
     TextInputEditText edtNameFood, edtPrice, edtPriceReduced;
     Button btnAddFood;
@@ -114,7 +120,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
             public void onResponse(Call<FoodModel> call, Response<FoodModel> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ThemMonAnActivity.this, "Thêm món ăn thành công.", Toast.LENGTH_SHORT).show();
-//                    finish();
+                    finish();
                 } else {
                     Toast.makeText(ThemMonAnActivity.this, "Lỗi khi thêm món ăn.", Toast.LENGTH_SHORT).show();
                 }

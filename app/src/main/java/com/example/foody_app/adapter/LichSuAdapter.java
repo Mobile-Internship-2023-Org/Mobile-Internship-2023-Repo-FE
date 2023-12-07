@@ -38,12 +38,11 @@ public class LichSuAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return mList.get(i).getIdMonAn();
+        return mList.get(i).getIdHoaDon();
     }
 
     private class ViewHolder{
-        ImageView mImageView;
-        TextView tvtrangThai, tvdiaChi, tvTen, tvloai, tvGia, tvSoLuong;
+        TextView tvtrangThai, tvdiaChi, tvMaHoaDon, tvNgayDat, tvTongTien, tvPhuongThucTT;
     }
 
     @Override
@@ -52,31 +51,22 @@ public class LichSuAdapter extends BaseAdapter {
         if(view == null){
             view = LayoutInflater.from(mContext).inflate(R.layout.lich_su_item_layout, viewGroup, false);
             viewHolder = new ViewHolder();
-            viewHolder.mImageView = view.findViewById(R.id.imgAnhMonAnLS);
-            viewHolder.tvTen = view.findViewById(R.id.tvTenMonAnLS);
+            viewHolder.tvMaHoaDon = view.findViewById(R.id.tvMaDonHang);
+            viewHolder.tvNgayDat = view.findViewById(R.id.tvNgayDat);
+            viewHolder.tvTongTien = view.findViewById(R.id.tvTongTien);
             viewHolder.tvdiaChi = view.findViewById(R.id.tvDiaChiLS);
-            viewHolder.tvGia = view.findViewById(R.id.tvGiaMonAnLS);
-            viewHolder.tvloai = view.findViewById(R.id.tvLoaiMonAnLS);
-            viewHolder.tvSoLuong = view.findViewById(R.id.tvSoLuongLS);
             viewHolder.tvtrangThai = view.findViewById(R.id.tvTrangThaiLS);
+            viewHolder.tvPhuongThucTT = view.findViewById(R.id.tvPhuongThucTT);
             view.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) view.getTag();
         }
-
-        viewHolder.mImageView.setImageResource(R.drawable.image2);
-        viewHolder.tvTen.setText(mList.get(i).getTenMonAn());
-        viewHolder.tvdiaChi.setText(mList.get(i).getDiaChi());
-        viewHolder.tvGia.setText(mList.get(i).getGia()+"");
-        viewHolder.tvloai.setText(mList.get(i).getLoai());
-        viewHolder.tvSoLuong.setText(mList.get(i).getSoLuong()+"");
-        if(mList.get(i).getTrangThai() == 0){
-            viewHolder.tvtrangThai.setText("Đã giao thành công");
-        }else if(mList.get(i).getTrangThai() == 1){
-            viewHolder.tvtrangThai.setText("Đơn hàng đang giao");
-        }else{
-            viewHolder.tvtrangThai.setText("Đơn hàng đang được xử lý");
-        }
+        viewHolder.tvdiaChi.setText("Địa chỉ: "+mList.get(i).getDiaChi());
+        viewHolder.tvMaHoaDon.setText("Mã hóa đơn: "+mList.get(i).getIdHoaDon()+"");
+        viewHolder.tvNgayDat.setText("Thời gian: "+mList.get(i).getNgayDat());
+        viewHolder.tvTongTien.setText(mList.get(i).getTongTienHoaDon()+"");
+        viewHolder.tvPhuongThucTT.setText(mList.get(i).getPhuongThucTT());
+        viewHolder.tvtrangThai.setText(mList.get(i).getTrangThai());
         return view;
     }
 }

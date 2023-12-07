@@ -56,7 +56,11 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.ViewHolder> 
         }
         return 0;
     }
-
+    public void updateList(List<FoodModel> newList) {
+        mList.clear();
+        mList.addAll(newList);
+        notifyDataSetChanged();
+    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTen, tvGia;
         ImageView mImageView;
