@@ -91,11 +91,9 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     UserModel userModel = response.body();
                     Log.e("", "onResponse: "+userModel.getHoTen() );
-//                    if(userModel.getRole().equals("admin")){
-//                        mNavigationView.getMenu().findItem(R.id.nav_shopping_cart).setVisible(false);
-//                    }else{
-//                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
-//                    }
+                    if(userModel.getRole().equals("user")){
+                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
+                    }
                 } else {
                     Log.e("TAG", "onResponse: " + response.errorBody());
                 }
