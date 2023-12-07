@@ -1,5 +1,7 @@
 package com.example.foody_app.adapter;
 
+import static com.example.foody_app.activities.ChiTietMonAnActivity.currencyFormat;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,14 @@ import com.example.foody_app.activities.ChiTietMonAnActivity;
 import com.example.foody_app.models.LichSuModel;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class LichSuAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<LichSuModel> mList;
+    private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
     public LichSuAdapter(Context context, List<LichSuModel> list) {
         mContext = context;
@@ -65,7 +69,7 @@ public class LichSuAdapter extends BaseAdapter {
         }
         viewHolder.tvdiaChi.setText("Địa chỉ: "+mList.get(i).getDiaChi());
         viewHolder.tvMaHoaDon.setText("Mã hóa đơn: "+mList.get(i).getIdHoaDon()+"");
-        viewHolder.tvNgayDat.setText("Thời gian: "+mList.get(i).getNgayDat());
+        viewHolder.tvNgayDat.setText("Thời gian: "+mSimpleDateFormat.format(mList.get(i).getNgayDat()));
         viewHolder.tvTongTien.setText(ChiTietMonAnActivity.currencyFormat(mList.get(i).getTongTienHoaDon()+"")+"đ");
         viewHolder.tvPhuongThucTT.setText(mList.get(i).getPhuongThucTT());
         viewHolder.tvtrangThai.setText(mList.get(i).getTrangThai());
