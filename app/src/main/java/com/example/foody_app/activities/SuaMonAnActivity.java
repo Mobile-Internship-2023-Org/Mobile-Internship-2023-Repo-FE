@@ -158,7 +158,9 @@ public class SuaMonAnActivity extends AppCompatActivity {
             public void onResponse(Call<updateResponse> call, Response<updateResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(SuaMonAnActivity.this, "Cập nhật món ăn thành công", Toast.LENGTH_SHORT).show();
-                    finish(); // Kết thúc activity sau khi cập nhật thành công
+                    Intent intent = new Intent(SuaMonAnActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
                     if (response.errorBody() != null) {
                         try {

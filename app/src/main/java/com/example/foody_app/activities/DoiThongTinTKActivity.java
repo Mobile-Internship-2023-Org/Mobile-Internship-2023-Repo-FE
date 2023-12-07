@@ -53,6 +53,7 @@ public class DoiThongTinTKActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_PICKER = 1;
     private Bitmap mBitmap  = null;
     private Button mButtonChange;
+    private int create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,15 @@ public class DoiThongTinTKActivity extends AppCompatActivity {
             }
         });
 
-        DangNhapActivity activity = new DangNhapActivity();
-        getUser(activity.readEmailLocally(this));
+         create = getIntent().getIntExtra("createAccount", 0);
+        if(create == 0){
+            DangNhapActivity activity = new DangNhapActivity();
+            getUser(activity.readEmailLocally(this));
+        }else{
+            String email = getIntent().getStringExtra("email");
+            edEmail.setText(email);
+            edEmail.setEnabled(false);
+        }
 
         // Toolbar setup
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -226,7 +234,15 @@ public class DoiThongTinTKActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(DoiThongTinTKActivity.this, "Đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    if(create == 0){
+                        Toast.makeText(DoiThongTinTKActivity.this, "Đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DoiThongTinTKActivity.this, "Hoàn tất thông tin", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DoiThongTinTKActivity.this, DangNhapActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+
                 }
             }
 
@@ -249,7 +265,14 @@ public class DoiThongTinTKActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(DoiThongTinTKActivity.this, "Đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    if(create == 0){
+                        Toast.makeText(DoiThongTinTKActivity.this, "Đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DoiThongTinTKActivity.this, "Hoàn tất thông tin", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DoiThongTinTKActivity.this, DangNhapActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
                 }
             }
 

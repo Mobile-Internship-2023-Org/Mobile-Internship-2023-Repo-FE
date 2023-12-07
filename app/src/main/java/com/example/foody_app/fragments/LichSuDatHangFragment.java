@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.foody_app.R;
 import com.example.foody_app.activities.ChiTietHoaDonActivity;
@@ -36,6 +37,7 @@ public class LichSuDatHangFragment extends Fragment {
     private List<LichSuModel> mList;
     private ListView mListView;
     private LichSuAdapter mAdapter;
+    private TextView mTextView;
 
     public LichSuDatHangFragment() {
         // Required empty public constructor

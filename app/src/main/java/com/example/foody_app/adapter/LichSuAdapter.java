@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.ChiTietMonAnActivity;
 import com.example.foody_app.models.LichSuModel;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class LichSuAdapter extends BaseAdapter {
@@ -64,7 +66,7 @@ public class LichSuAdapter extends BaseAdapter {
         viewHolder.tvdiaChi.setText("Địa chỉ: "+mList.get(i).getDiaChi());
         viewHolder.tvMaHoaDon.setText("Mã hóa đơn: "+mList.get(i).getIdHoaDon()+"");
         viewHolder.tvNgayDat.setText("Thời gian: "+mList.get(i).getNgayDat());
-        viewHolder.tvTongTien.setText(mList.get(i).getTongTienHoaDon()+"");
+        viewHolder.tvTongTien.setText(ChiTietMonAnActivity.currencyFormat(mList.get(i).getTongTienHoaDon()+"")+"đ");
         viewHolder.tvPhuongThucTT.setText(mList.get(i).getPhuongThucTT());
         viewHolder.tvtrangThai.setText(mList.get(i).getTrangThai());
         return view;

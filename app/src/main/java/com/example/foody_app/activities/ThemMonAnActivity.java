@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.foody_app.MainActivity;
 import com.example.foody_app.R;
 import com.example.foody_app.models.FoodModel;
 import com.example.foody_app.models.TypeFood;
@@ -120,7 +121,9 @@ public class ThemMonAnActivity extends AppCompatActivity {
             public void onResponse(Call<FoodModel> call, Response<FoodModel> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ThemMonAnActivity.this, "Thêm món ăn thành công.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(ThemMonAnActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ThemMonAnActivity.this, "Lỗi khi thêm món ăn.", Toast.LENGTH_SHORT).show();
                 }

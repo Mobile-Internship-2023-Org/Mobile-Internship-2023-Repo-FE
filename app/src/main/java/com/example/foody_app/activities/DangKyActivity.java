@@ -90,7 +90,10 @@ public class DangKyActivity extends AppCompatActivity {
             public void onResponse(Call<LoginRegisterModel> call, Response<LoginRegisterModel> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(DangKyActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                    finish(); // Đóng màn hình hiện tại nếu bạn không muốn quay lại màn hình đăng nhập
+                    Intent intent = new Intent(DangKyActivity.this, DoiThongTinTKActivity.class);
+                    intent.putExtra("createAccount",1);
+                    intent.putExtra("email", edtEmail.getText().toString());
+                    startActivity(intent);
                 } else {
                     // Xử lý khi response không thành công
                     try {

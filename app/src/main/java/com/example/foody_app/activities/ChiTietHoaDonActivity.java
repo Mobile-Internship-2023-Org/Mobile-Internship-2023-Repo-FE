@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foody_app.MainActivity;
 import com.example.foody_app.R;
 import com.example.foody_app.adapter.MonAnAdapter2;
 import com.example.foody_app.models.LichSuModel;
@@ -72,6 +73,9 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 huyDon(idHoaDon.intValue(), 4);
+                Intent intent = new Intent(ChiTietHoaDonActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         btnHuy2.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +85,9 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
                     Toast.makeText(ChiTietHoaDonActivity.this, "Không thể hủy", Toast.LENGTH_SHORT).show();
                 }else{
                     huyDon(idHoaDon.intValue(),4);
+                    Intent intent = new Intent(ChiTietHoaDonActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
             }
         });

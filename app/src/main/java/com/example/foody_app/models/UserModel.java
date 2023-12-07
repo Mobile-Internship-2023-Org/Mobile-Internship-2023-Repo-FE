@@ -3,7 +3,6 @@ package com.example.foody_app.models;
 import kotlin.jvm.internal.PropertyReference0Impl;
 
 public class UserModel {
-    private static UserModel currentUser;
     private int idNguoiDung;
     private String email;
     private String matKhau;
@@ -14,17 +13,6 @@ public class UserModel {
     private String role;
 
     public UserModel() {
-    }
-
-    public static UserModel getCurrentUser() {
-        // Simulate getting the current user from your authentication system
-        // Replace this with your actual mechanism to get the current user
-
-        if (currentUser == null) {
-            currentUser = new UserModel();
-            currentUser.getEmail();
-        }
-        return currentUser;
     }
 
     public int getIdNguoiDung() {

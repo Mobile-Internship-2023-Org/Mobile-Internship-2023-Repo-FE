@@ -5,6 +5,7 @@ import com.example.foody_app.models.InforModel;
 import com.example.foody_app.models.LichSuModel;
 import com.example.foody_app.models.MonAnModel;
 import com.example.foody_app.models.RatingModel;
+import com.example.foody_app.models.RatingModel2;
 import com.example.foody_app.models.RePassModel;
 import com.example.foody_app.models.RestaurantModel;
 import com.example.foody_app.models.LoginRegisterModel;
@@ -23,6 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
@@ -95,8 +97,8 @@ public interface APIInterface {
     @GET("/user/{email}")
     Call<UserModel> getUserByEmail(@Path("email") String email);
 
-    @GET("/getInfor")
-    Call<List<InforModel>> getInfor();
+    @GET("/getInfor/{email}")
+    Call<List<InforModel>> getInfor(@Path("email")String email);
 
     @POST("/addToCart")
     Call<Void> addToCart(@Body ShoppingCartModel model);
@@ -149,4 +151,19 @@ public interface APIInterface {
     Call<Void> updateTrangThaiHoaDon(@Path("idHoaDon") int idHoaDon, @Path("trangThai") int trangthai);
     @GET("/hoadon/getHoaDonListAll")
     Call<List<LichSuModel>> getHoaDon();
+
+    @GET("/getAllReviews")
+    Call<List<RatingModel2>> getAllReviews();
+
+    @GET("/getReviewById/{id}")
+    Call<RatingModel2> getReviewById(@Path("id") int id);
+
+    @POST("/addReview")
+    Call<RatingModel2> addReview(@Body RatingModel2 ratingModel);
+
+    @PUT("/updateReview/{id}")
+    Call<RatingModel2> updateReview(@Path("id") int id, @Body RatingModel2 ratingModel);
+
+    @DELETE("/deleteReview/{id}")
+    Call<Void> deleteReview(@Path("id") int id);
 }
