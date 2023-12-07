@@ -85,6 +85,9 @@ public interface APIInterface {
     @GET("/rating")
     Call<List<RatingModel>> getRating();
 
+    @POST("/RePassController/{userId}")
+    Call<RePassModel> rePassModelCall(@Path("userId") RePassModel userId);
+
     // == Hóa đơn ==
     // Get nguoidung info by email
     @GET("/hoadon/getNguoiDungByEmail/{email}")
