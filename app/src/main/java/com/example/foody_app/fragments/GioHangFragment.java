@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.ChiTietMonAnActivity;
+import com.example.foody_app.activities.DangNhapActivity;
 import com.example.foody_app.activities.XacNhanDonHangActivity;
 import com.example.foody_app.adapter.GioHangAdapter;
 import com.example.foody_app.models.InforModel;
@@ -62,8 +64,8 @@ public class GioHangFragment extends Fragment {
 
         mInforModel = new ArrayList<>();
 
-        UserModel user = UserModel.getCurrentUser();
-        String userEmail = user.getEmail();
+        DangNhapActivity activity = new DangNhapActivity();
+        String userEmail = activity.readEmailLocally(getContext());
         getInfor(userEmail);
         updateTotalAmount();
 
@@ -88,7 +90,7 @@ public class GioHangFragment extends Fragment {
 
     private void getInfor(String userEmail) {
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
-        Call<List<InforModel>> call = apiInterface.getInfor();
+        Call<List<InforModel>> call = apiInterface.getInfor(userEmail);
         call.enqueue(new Callback<List<InforModel>>() {
             @Override
             public void onResponse(Call<List<InforModel>> call, Response<List<InforModel>> response) {
@@ -113,7 +115,7 @@ public class GioHangFragment extends Fragment {
     public void updateTotalAmount() {
         long totalAmount = calculateTotal();
         TextView txtTongTien = getView().findViewById(R.id.txtTongTien);
-        txtTongTien.setText("Tổng tiền: " + totalAmount + " VND");
+        txtTongTien.setText("Tổng tiền: " + ChiTietMonAnActivity.currencyFormat(totalAmount+"") + " VND");
     }
 
     private long calculateTotal() {
