@@ -1,8 +1,6 @@
 package com.example.foody_app.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,13 +54,12 @@ public class DanhGiaActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the email from SharedPreferences
-                String userEmail = readEmailLocally(DanhGiaActivity.this);
-
-                // Call the getUserData method with the obtained email
-                getUserData(userEmail);
+                // Call the addReview method with the obtained idNguoiDung
+                addReview(idNguoiDung);
             }
         });
+
+        // Add any other click listeners as needed
     }
 
     private void getUserData(String email) {
@@ -77,8 +74,8 @@ public class DanhGiaActivity extends AppCompatActivity {
                     // Now you can use the idNguoiDung for further processing
                     Log.e("TAG", "User ID: " + idNguoiDung);
 
-                    // Call the addReview method with the obtained idNguoiDung
-                    addReview(idNguoiDung);
+                    // Use the idNguoiDung for adding a review
+                    // Optionally, you can set UI elements or perform other actions here
                 } else {
                     // Handle unsuccessful response
                 }
@@ -96,44 +93,37 @@ public class DanhGiaActivity extends AppCompatActivity {
         float ratingValue = ratingBar.getRating();
         String reviewText = commentEditText.getText().toString();
 
-        // Check if ratingValue and reviewText are valid
-        if (ratingValue > 0 && !reviewText.isEmpty()) {
-            // Create a RatingModel object with the review details
-            RatingModel2 ratingModel = new RatingModel2();
-            ratingModel.setSoSao(ratingValue);
-            ratingModel.setMoTa(reviewText);
-            ratingModel.setIdNguoiDung(idNguoiDung);
+        // Create a RatingModel object with the review details
+        RatingModel2 ratingModel = new RatingModel2();
+        ratingModel.setSoSao(ratingValue); // Use the provided rating value
+        ratingModel.setMoTa(reviewText); // Use the provided review text
+        ratingModel.setIdNguoiDung(idNguoiDung); // Use the provided idNguoiDung
 
-            // Make the Retrofit API call for adding a review
-            Call<RatingModel2> addReviewCall = apiInterface.addReview(ratingModel);
-            addReviewCall.enqueue(new Callback<RatingModel2>() {
-                @Override
-                public void onResponse(Call<RatingModel2> call, Response<RatingModel2> response) {
-                    if (response.isSuccessful()) {
-                        RatingModel2 addedReview = response.body();
-                        Toast.makeText(DanhGiaActivity.this, "Review added successfully", Toast.LENGTH_SHORT).show();
-                        // Handle successful review addition, if needed
-                    } else {
-                        Toast.makeText(DanhGiaActivity.this, "Failed to add review", Toast.LENGTH_SHORT).show();
-                        // Handle unsuccessful response
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<RatingModel2> call, Throwable t) {
+        // Make the Retrofit API call for adding a review
+        Call<RatingModel2> addReviewCall = apiInterface.addReview(ratingModel);
+        addReviewCall.enqueue(new Callback<RatingModel2>() {
+            @Override
+            public void onResponse(Call<RatingModel2> call, Response<RatingModel2> response) {
+                if (response.isSuccessful()) {
+                    RatingModel2 addedReview = response.body();
+                    Toast.makeText(DanhGiaActivity.this, "Review added successfully", Toast.LENGTH_SHORT).show();
+                    // Handle successful review addition, if needed
+                } else {
                     Toast.makeText(DanhGiaActivity.this, "Failed to add review", Toast.LENGTH_SHORT).show();
-                    // Handle failure
-                    Log.d("TAG", "Failed", t);
+                    // Handle unsuccessful response
+
+
                 }
-            });
-        } else {
-            Toast.makeText(DanhGiaActivity.this, "Please provide valid rating and review", Toast.LENGTH_SHORT).show();
-        }
+            }
+
+            @Override
+            public void onFailure(Call<RatingModel2> call, Throwable t) {
+                Toast.makeText(DanhGiaActivity.this, "Failed to add review", Toast.LENGTH_SHORT).show();
+                // Handle failure
+                Log.d("TAG","Failed",t);
+
+            }
+        });
     }
 
-    // Add the readEmailLocally method if not already present
-    private String readEmailLocally(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("email", "");
-    }
 }
