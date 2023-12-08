@@ -34,6 +34,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface APIInterface {
     //lấy dữ liệu món ăn
@@ -113,6 +114,10 @@ public interface APIInterface {
     // Get nguoidung info by email
     @GET("/hoadon/getNguoiDungByEmail/{email}")
     Call<UserModel> getNguoidungByEmail(@Path("email") String email);
+
+    // API to update 'hoTen' and 'sdt' of a nguoidung using email
+    @PUT("/hoadon/updateNguoidungInfo")
+    Call<Void> updateNguoidungInfo(@Body RequestBody requestBody);
 
     @GET("/hoadon/getIdGioHang/{idNguoiDung}")
     Call<JsonObject> getIdGioHang(@Path("idNguoiDung") int idNguoiDung);

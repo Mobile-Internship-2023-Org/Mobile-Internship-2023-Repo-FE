@@ -26,13 +26,18 @@ public class ChangeDiaChiDialog extends Dialog {
         setContentView(R.layout.dialog_change_dia_chi);
 
         EditText edtNewDiaChi = findViewById(R.id.edtNewDiaChi);
+        EditText edtNewName = findViewById(R.id.edtNewName);
+        EditText edtNewPhoneNumber = findViewById(R.id.edtNewPhoneNumber);
         Button btnSave = findViewById(R.id.btnSave);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newDiaChi = edtNewDiaChi.getText().toString();
-                listener.onDiaChiChanged(newDiaChi);
+                String newName = edtNewName.getText().toString();
+                String newPhoneNumber = edtNewPhoneNumber.getText().toString();
+
+                listener.onDiaChiChanged(newDiaChi, newName, newPhoneNumber);
                 dismiss();
             }
         });
