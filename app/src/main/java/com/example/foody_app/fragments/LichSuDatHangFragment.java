@@ -78,6 +78,13 @@ public class LichSuDatHangFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getRole(getEmail());
+    }
+
     private void getHoaDon(String email){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<List<LichSuModel>> call = apiInterface.getHoaDon(email);

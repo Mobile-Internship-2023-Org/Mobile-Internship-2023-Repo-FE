@@ -58,8 +58,7 @@ public class TaiKhoanFragment extends Fragment {
 
         onBindView(view);
 
-        DangNhapActivity activity = new DangNhapActivity();
-        getUserData(activity.readEmailLocally(requireContext()));
+        getUserData(getEmail());
 
         cvInfoRestaurant.setOnClickListener(view14 -> {
             Intent intent = new Intent(getContext(), ThongTinNhaHangActivity.class);
@@ -89,6 +88,12 @@ public class TaiKhoanFragment extends Fragment {
         tvTen = view.findViewById(R.id.tvTenND);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserData(getEmail());
+    }
+
     /**
      * lấy dữ liệu người dùng theo @param email
      */
@@ -116,5 +121,9 @@ public class TaiKhoanFragment extends Fragment {
                 Toast.makeText(getActivity(), "lỗi "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private String getEmail(){
+        DangNhapActivity activity = new DangNhapActivity();
+        return activity.readEmailLocally(requireContext());
     }
 }

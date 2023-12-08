@@ -59,7 +59,9 @@ public class TimKiemActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FoodModel item) {
                 Intent intent = new Intent(TimKiemActivity.this, ChiTietMonAnActivity.class);
-                intent.putExtra("idFood", item.getIdMonAn());  // Assuming FoodModel has getId() method
+                intent.putExtra("idFood", (long) item.getIdMonAn());
+                intent.putExtra("idType",item.getIdTheLoai());
+                Log.e("TAG", "onItemClick: "+item.getIdTheLoai() );// Assuming FoodModel has getId() method
                 startActivity(intent);
             }
         });

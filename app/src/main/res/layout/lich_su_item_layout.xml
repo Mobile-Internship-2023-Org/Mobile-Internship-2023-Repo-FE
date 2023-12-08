@@ -71,14 +71,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tổng tiền:"
                 android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_marginStart="20dp"
+                android:textSize="16dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:textColor="@color/red"
                 />
@@ -87,12 +88,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12346654"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/red"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 />
         </LinearLayout>
 

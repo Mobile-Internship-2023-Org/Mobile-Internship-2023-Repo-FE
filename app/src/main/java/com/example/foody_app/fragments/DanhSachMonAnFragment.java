@@ -80,8 +80,7 @@ public class DanhSachMonAnFragment extends Fragment {
         getAllFood();
         mGridView.setAdapter(mAdapter);
 
-        DangNhapActivity dangNhapActivity = new DangNhapActivity();
-        getUserData(dangNhapActivity.readEmailLocally(getContext()));
+        getUserData(getEmail());
         fabAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +118,13 @@ public class DanhSachMonAnFragment extends Fragment {
         cardViewSearch = view.findViewById(R.id.cardViewSearch);
         mGridView = view.findViewById(R.id.grid_ds);
         tvNguoiDung = view.findViewById(R.id.tvNguoiDung);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserData(getEmail());
+        getAllFood();
     }
 
     /**
@@ -170,5 +176,9 @@ public class DanhSachMonAnFragment extends Fragment {
 
             }
         });
+    }
+    private String getEmail(){
+        DangNhapActivity dangNhapActivity = new DangNhapActivity();
+        return dangNhapActivity.readEmailLocally(requireContext());
     }
 }

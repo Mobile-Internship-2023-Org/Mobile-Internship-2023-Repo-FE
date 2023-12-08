@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.example.foody_app.utils.UserModelHelper;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
     private LinearLayout layoutAdmin, layoutUser;
     private Button btnHuy1, btnHuy2, btnNhanDon, btnNHanHang;
     private String role, trangThai;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,12 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
                 }
             }
         });
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void onBinView(){
@@ -121,7 +130,7 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
                     tvsdt.setText("Số điện thoại: "+model.getSdt());
                     tvDiaChi.setText("Địa chỉ: "+model.getDiaChi());
                     tvTen.setText("Họ tên: "+model.getHoTen());
-                    tvNgayDat.setText("Ngày đặt: "+model.getNgayDat());
+                    tvNgayDat.setText("Ngày đặt: "+new SimpleDateFormat("yyyy-MM-dd hh:mm").format(model.getNgayDat()));
                     tvTongTien.setText(ChiTietMonAnActivity.currencyFormat(""+model.getTongTienHoaDon())+"đ");
                     if(trangThai.equals("Đã hoàn thành") || trangThai.equals("Hủy đơn")){
                         btnHuy1.setVisibility(View.GONE);
