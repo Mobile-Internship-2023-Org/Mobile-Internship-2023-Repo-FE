@@ -31,12 +31,14 @@
         android:layout_margin="16dp"
         >
     <TextView
+        android:id="@+id/tvIdDonHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="- ID: abc123"
         android:textColor="#000000"
         android:textSize="16dp" />
     <TextView
+        android:id="@+id/tvThoiGian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="- Nhận đơn: 10:10 PM, 24/10/2023"
@@ -44,18 +46,21 @@
         android:textSize="16dp" />
 
     <TextView
+        android:id="@+id/tvTenKhachHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="- Khách hàng: Thành"
         android:textColor="#000000"
         android:textSize="16dp" />
     <TextView
+        android:id="@+id/tvDiaChiKhachHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="- Địa chỉ giao hàng: 137 Nguyễn Thị Thập, Hòa Minh, Liên Chiểu"
         android:textColor="#000000"
         android:textSize="16dp" />
     <TextView
+        android:id="@+id/tvSdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -77,110 +82,11 @@
         android:textColor="#000000"
         android:layout_marginTop="8dp"
         android:textSize="16dp" />
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-        <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="- Đùi gà rán"
-        android:textColor="#000000"
-        android:textSize="16dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="- Số lượng: 1x"
-                android:textColor="#2E2D2D"
-                android:textSize="14dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:hint="- 1x | 30.000đ"
-                android:textColor="#2E2D2D"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="- Pepsi"
-            android:textColor="#000000"
-            android:textSize="16dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="- Số lượng: 1x"
-                android:textColor="#2E2D2D"
-                android:textSize="14dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:hint="- 1x | 10.000đ"
-                android:textColor="#2E2D2D"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="- Khoai tây chiên"
-            android:textColor="#000000"
-            android:textSize="16dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="- Số lượng: 1x"
-            android:textColor="#2E2D2D"
-            android:textSize="14dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="- 1x | 35.000đ"
-            android:textColor="#2E2D2D"
-            android:textSize="12dp" />
-    </LinearLayout>
-    </LinearLayout>
+        android:id="@+id/lvDoAn"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -195,14 +101,14 @@
         android:layout_marginLeft="16dp"
         android:textColor="#000000"
         android:textSize="16dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="*Ghi chú:"
-        android:layout_marginLeft="16dp"
-        android:textColor="#000000"
-        android:textSize="16dp"
-        android:layout_marginBottom="8dp"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="*Ghi chú:"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="16dp"-->
+<!--        android:layout_marginBottom="8dp"/>-->
 
     <View
         android:layout_width="match_parent"
@@ -226,6 +132,7 @@
         android:textColor="#000000"
         android:textSize="20dp" />
     <TextView
+        android:id="@+id/tvTongTien2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="90.000đ"
@@ -235,35 +142,55 @@
         android:textColor="#000000"
         android:textSize="20dp" />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*Đã thanh toán"
-        android:layout_gravity="right"
-        android:textColor="@color/green"
-        android:layout_marginRight="16dp"/>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp">
-        <TextView
+        android:text="- Hình thức thanh toán: Tiền mặt"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:id="@+id/layoutAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/btnHuyDon1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- Hình thức thanh toán: Tiền mặt"
-            android:textColor="#000000"
-            android:textSize="16dp" />
-
-        <TextView
+            android:text="Hủy đơn hàng"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btnNhanDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- Tình trạng đơn hàng: Đã hoàn thành"
-            android:textColor="#000000"
-            android:textSize="16dp" />
-
-
+            android:text="Giao hàng"
+            android:layout_weight="1"
+            />
     </LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/layoutUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/btnHuyDon2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy đơn hàng"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btnNhanHang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhận hàng"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
 </LinearLayout>

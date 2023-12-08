@@ -30,11 +30,11 @@
 
     <ImageView
         android:id="@+id/imgShop"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
-        android:src="@drawable/default_image"
         android:layout_gravity="center"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/default_image" />
 
     <EditText
         android:layout_marginTop="40dp"
@@ -44,6 +44,7 @@
         android:layout_marginStart="16dp"
         android:hint="Name shop"
         android:textSize="24dp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <EditText
@@ -53,7 +54,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:hint="0123456789"
+        android:textColor="@color/black"
         android:textSize="16dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,17 +90,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:hint="https:/www.facebook.comlocale=vi_VN"
-                android:textColor="@color/pink"
+                android:textColor="@color/black"
                 android:textSize="12dp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:background="#CCCCCC"/>
+            android:layout_marginEnd="20dp"
+            android:background="#CCCCCC"
+            tools:layout_marginStart="20dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,31 +132,35 @@
                 android:textStyle="bold"
                 android:textSize="18dp" />
 
-        <EditText
-            android:id="@+id/edAddress"
-            android:layout_width="262dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:hint="Address"
-            android:textSize="12dp"
-            android:textColor="@color/pink" />
+            <EditText
+                android:id="@+id/edAddress"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:hint="Address"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:background="#CCCCCC"/>
+            android:layout_marginEnd="20dp"
+            android:background="#CCCCCC" />
     </LinearLayout>
-        <Button
-            android:id="@+id/btnUpdate"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="32dp"
-            android:text="Update"/>
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="24dp"
+        android:text="Sửa thông tin"/>
 
 </LinearLayout>

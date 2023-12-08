@@ -21,7 +21,6 @@
             />
     </androidx.appcompat.widget.Toolbar>
     <RatingBar
-
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +28,8 @@
         android:rating="0"
         android:stepSize="1"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,28 +44,35 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp" />
         <EditText
+            android:id="@+id/edComment"
             android:layout_width="410dp"
             android:layout_height="158dp"
             android:minLines="3"
-            android:textSize="24dp"
+            android:textSize="18dp"
+            android:gravity="top"
+            android:layout_marginHorizontal="10dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            />
+            android:contentDescription="Enter your comment"
+            android:hint="Enter your comment"
+            android:inputType="textMultiLine"/>
+
     </LinearLayout>
 
 
     <Button
-        android:id="@+id/btnGuidanhgia"
+        android:id="@+id/btnSendRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:background="#FF4081"
+        android:background="#D11A58"
         android:text="Gửi đánh giá"
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tvSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bỏ qua"
@@ -74,4 +81,3 @@
         android:layout_gravity="center"/>
 
 </LinearLayout>
-
