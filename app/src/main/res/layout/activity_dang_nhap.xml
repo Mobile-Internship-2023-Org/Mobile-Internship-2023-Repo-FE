@@ -11,65 +11,91 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="247dp"
+        android:layout_height="227dp"
         android:layout_margin="10dp"
-        android:src="@drawable/foodyback"
-
-        />
+        android:src="@drawable/foodyback" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FOODY"
-        android:layout_marginLeft="140dp"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:layout_gravity="center"
         />
 
-    <EditText
-        android:id="@+id/edtUser"
-        android:layout_width="333dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="Username"
-        />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:boxBackgroundColor="#FFFFFF"> <!-- Màu nền của TextInputLayout -->
 
-    <EditText
-        android:id="@+id/edtPass"
-        android:layout_width="333dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+             />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:hint="password"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password?"
-        android:textColor="#EE5050"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Password"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:boxBackgroundColor="#FFFFFF"> <!-- Màu nền của TextInputLayout -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+             />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
-        android:text="Sign In ->"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@color/black"
         android:background="@drawable/btn_login"
-        />
+        android:text="Sign In"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="or continue with"
-        android:layout_marginLeft="150dp"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         />
@@ -111,22 +137,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="10dp"
             android:textColor="@color/black"
             />
         <TextView
             android:id="@+id/txtSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:text="SIGN UP "
             android:textColor="#EE5050" />
     </LinearLayout>

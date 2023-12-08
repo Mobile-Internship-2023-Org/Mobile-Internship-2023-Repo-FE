@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_item_order_history">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+            <TextView
+                android:id="@+id/tvMaDonHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đơn hàng số: 2"
+                android:textColor="@color/red"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvTrangThaiLS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đơn hàng đang được giao đến bạn"
+                android:gravity="right"
+                android:textColor="@color/red"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvNgayDat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ngày đặt: 20-11-2023"
+            android:layout_margin="8dp"
+            />
+
+        <TextView
+            android:id="@+id/tvDiaChiLS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ: 116 Nguyễn Huy Tưởng, Hòa An, Liên Chiểu, Đà Nẵng, Việt Nam"
+            android:layout_margin="8dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phương thức TT"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                />
+            <TextView
+                android:id="@+id/tvPhuongThucTT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tiền mặt"
+                android:textColor="@color/red"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginEnd="8dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền:"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                />
+            <TextView
+                android:id="@+id/tvTongTien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12346654"
+                android:textSize="20dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginEnd="20dp"
+                />
+        </LinearLayout>
+
+        </LinearLayout>
+</LinearLayout>

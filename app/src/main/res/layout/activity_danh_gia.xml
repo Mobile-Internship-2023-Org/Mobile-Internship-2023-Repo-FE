@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DanhGiaActivity">
-
-    <ImageView
-        android:layout_width="408dp"
-        android:layout_height="291dp"
-        android:src="@mipmap/stars"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-    </ImageView>
-
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="vertical"
+    tools:context=".activities.DanhGiaActivity"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đánh giá"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="1"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhận xét:"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/edComment"
+            android:layout_width="410dp"
+            android:layout_height="158dp"
+            android:minLines="3"
+            android:textSize="18dp"
+            android:gravity="top"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Enter your comment"
+            android:hint="Enter your comment"
+            android:inputType="textMultiLine"/>
 
     </LinearLayout>
 
 
-
     <Button
-        android:id="@+id/btnGuidanhgia"
-        android:layout_width="266dp"
-        android:layout_height="51dp"
+        android:id="@+id/btnSendRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="#D11A58"
         android:text="Gửi đánh giá"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="629dp" />
+        android:textSize="16sp" />
 
     <TextView
-        android:layout_width="398dp"
-        android:layout_height="158dp"
-        android:text="Nhận xét:"
-        android:textSize="24dp"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="371dp" />
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bỏ qua"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

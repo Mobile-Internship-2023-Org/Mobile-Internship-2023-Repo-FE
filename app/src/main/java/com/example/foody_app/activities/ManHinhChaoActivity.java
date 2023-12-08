@@ -26,6 +26,7 @@ public class ManHinhChaoActivity extends AppCompatActivity {
                 // sau khi het tgian thi thuc hien cv gi do
                 Intent intent  = new Intent(ManHinhChaoActivity.this,DangNhapActivity.class);
                 startActivity(intent);
+                finish();
             }
         }.start();
 

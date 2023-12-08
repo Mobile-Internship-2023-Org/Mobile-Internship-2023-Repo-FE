@@ -10,130 +10,101 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/myBackToolbar"
+
         >
         <ImageView
-
+            android:id="@+id/myBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/backphap"/>
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông tin khách hàng"
+            android:text="Thông tin nhà hàng"
             android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
-    
+
     <ImageView
         android:id="@+id/imgShop"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
-        android:src="@drawable/default_image"
         android:layout_gravity="center"
-        />
-    <TextView
-        android:id="@+id/tvName"
+        android:scaleType="fitCenter"
+        android:src="@drawable/default_image" />
+
+    <EditText
+        android:layout_marginTop="40dp"
+        android:id="@+id/edName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name shop"
-        android:textSize="24dp"
         android:layout_marginStart="16dp"
-        />
+        android:hint="Name shop"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvPhoneNumber"
+    <EditText
+        android:id="@+id/edPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:text="0123456789"
+        android:hint="0123456789"
+        android:textColor="@color/black"
         android:textSize="16dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/shop" />
+                android:src="@drawable/facebook1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:text="Products:"
-                android:textSize="18dp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="123"
-                android:textColor="@color/pink" />
-
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="#CCCCCC"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            >
-            <ImageView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:src="@drawable/facebook1"
-                android:layout_marginStart="16dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Fanpage:"
                 android:textSize="18dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                />
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvFanpage"
+            <EditText
+                android:id="@+id/edFanpage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:text="https:/www.facebook.comlocale=vi_VN"
-                android:textColor="@color/pink"
-                />
+                android:hint="https:/www.facebook.comlocale=vi_VN"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:background="#CCCCCC"/>
+            android:layout_marginEnd="20dp"
+            android:background="#CCCCCC"
+            tools:layout_marginStart="20dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -158,26 +129,38 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:text="Address:"
-                android:textSize="18dp"
-                />
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="262dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="Đà nẵng"
-            android:textColor="@color/pink" />
+            <EditText
+                android:id="@+id/edAddress"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:hint="Address"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:background="#CCCCCC"/>
+            android:layout_marginEnd="20dp"
+            android:background="#CCCCCC" />
     </LinearLayout>
-
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="24dp"
+        android:text="Sửa thông tin"/>
 
 </LinearLayout>
