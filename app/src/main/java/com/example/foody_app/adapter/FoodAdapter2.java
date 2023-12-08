@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foody_app.R;
+import com.example.foody_app.activities.ChiTietMonAnActivity;
 import com.example.foody_app.models.FoodModel;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +51,7 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.ViewHolder> 
         holder.bind(mList.get(position), mListener);
     }
 
+
     @Override
     public int getItemCount() {
         if(mList != null){
@@ -80,6 +83,8 @@ public class FoodAdapter2 extends RecyclerView.Adapter<FoodAdapter2.ViewHolder> 
                     listener.onItemClick(item);
                 }
             });
+
         }
+
     }
 }
