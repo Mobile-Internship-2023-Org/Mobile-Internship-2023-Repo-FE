@@ -12,8 +12,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,12 +38,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,11 +57,12 @@ public class XacNhanDonHangActivity extends AppCompatActivity
         implements OnDiaChiChangedListener, OnThanhToanChangedListener {
     private TextView nameAndPhoneTv, addressTv, deliveryTimeTv,
             totalItemsTv, totaItemsPriceTv, totalPriceTv,
-            changeDeliveryTv, changePaymentMethodTv, showMoreTv;
+            changeDeliveryTv, changePaymentMethodTv, showMoreTv,
+            commentTv, changeCommentTv;
     private Button confirmOrderBtn;
-
     private MonanAdapter monanAdapter;
     private RecyclerView recyclerViewMonan;
+    private EditText edComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +80,8 @@ public class XacNhanDonHangActivity extends AppCompatActivity
         confirmOrderBtn = findViewById(R.id.confirmOrderBtn);
         recyclerViewMonan = findViewById(R.id.recyclerViewMonan);
         showMoreTv = findViewById(R.id.showMoreTv);
+        edComment = findViewById(R.id.edComment);
+
 
         // Retrieve the saved email
         String savedEmail = getEmailFromDangNhap();
@@ -96,6 +108,27 @@ public class XacNhanDonHangActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 showChangeDiaChiDialog();
+            }
+        });
+
+        // Event for changing comment
+        edComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    saveCommentToPreferences(edComment.getText().toString());
+                }
+            }
+        });
+        edComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    edComment.clearFocus();
+                    hideKeyboard(edComment);
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -156,6 +189,18 @@ public class XacNhanDonHangActivity extends AppCompatActivity
 
         // Log everything in Shared Preferences
         logSharedPreferences();
+    }
+
+    private void saveCommentToPreferences(String comment) {
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("comment", comment);
+        editor.apply();
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private String getEmailFromDangNhap() {
@@ -422,19 +467,39 @@ public class XacNhanDonHangActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDiaChiChanged(String newDiaChi) {
+    public void onDiaChiChanged(String newDiaChi, String newName, String newPhoneNumber) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
         if (!newDiaChi.isEmpty()) {
             TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setText(newDiaChi);
-
-            saveDiaChiLocally(newDiaChi);
+            saveToSharedPreferences("diaChi", newDiaChi);
         }
+
+        String oldName = sharedPreferences.getString("hoTen", "");
+        String oldPhoneNumber = sharedPreferences.getString("sdt", "");
+
+        if (!newName.isEmpty()) {
+            saveToSharedPreferences("hoTen", newName);
+        } else {
+            newName = oldName;
+        }
+
+        if (!newPhoneNumber.isEmpty()) {
+            saveToSharedPreferences("sdt", newPhoneNumber);
+        } else {
+            newPhoneNumber = oldPhoneNumber;
+        }
+
+        nameAndPhoneTv.setText(newName + " | " + newPhoneNumber);
+
+        updateNguoidungInfo();
     }
 
-    private void saveDiaChiLocally(String diaChi) {
+    private void saveToSharedPreferences(String key, String value)  {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("diaChi", diaChi);
+        editor.putString(key, value);
         editor.apply();
     }
 
@@ -465,7 +530,7 @@ public class XacNhanDonHangActivity extends AppCompatActivity
         int idGioHang = sharedPreferences.getInt("idGioHang", -1);
         String diaChi = sharedPreferences.getString("diaChi", "");
         int tongTienHoaDon = sharedPreferences.getInt("tongTien", -1);
-        String comment = "";
+        String comment = sharedPreferences.getString("comment", "");
         String phuongThucTT = sharedPreferences.getString("phuongThucTT", "Thanh toán tiền mặt");
 
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
@@ -525,6 +590,42 @@ public class XacNhanDonHangActivity extends AppCompatActivity
                 Log.e("XacNhanDonHang", "completeGioHang: API call failed: " + t.getMessage());
             }
         });
+    }
+
+    private void updateNguoidungInfo() {
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String email = preferences.getString("email", "");
+        String hoTen = preferences.getString("hoTen", "");
+        String sdt = preferences.getString("sdt", "");
+
+        try {
+            // Create a JSON object
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("email", email);
+            jsonObject.put("hoTen", hoTen);
+            jsonObject.put("sdt", sdt);
+
+            // Create a RequestBody from the JSON object
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+
+            APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
+
+            Call<Void> call = apiInterface.updateNguoidungInfo(requestBody);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                    } else {
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
+        } catch (JSONException e) {
+            throw new RuntimeException("Error creating JSON object. Please check your data.", e);
+        }
     }
 
 }
