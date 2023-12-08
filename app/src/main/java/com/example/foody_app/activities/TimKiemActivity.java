@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,7 +58,9 @@ public class TimKiemActivity extends AppCompatActivity {
         mAdapter = new FoodAdapter2(new ArrayList<>(), new FoodAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(FoodModel item) {
-
+                Intent intent = new Intent(TimKiemActivity.this, ChiTietMonAnActivity.class);
+                intent.putExtra("idFood", item.getIdMonAn());  // Assuming FoodModel has getId() method
+                startActivity(intent);
             }
         });
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -83,7 +86,6 @@ public class TimKiemActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
     private void setOnclickToolbar(){
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +106,6 @@ public class TimKiemActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<List<FoodModel>> call, Throwable t) {
                 Toast.makeText(TimKiemActivity.this, "Lỗi", Toast.LENGTH_SHORT).show();
