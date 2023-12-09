@@ -1,5 +1,7 @@
 package com.example.foody_app.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class LichSuModel {
@@ -12,6 +14,16 @@ public class LichSuModel {
     private int idGioHang;
     private String hoTen;
     private String sdt;
+    @SerializedName("comment")
+    private String ghiChu;
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
 
     public String getHoTen() {
         return hoTen;

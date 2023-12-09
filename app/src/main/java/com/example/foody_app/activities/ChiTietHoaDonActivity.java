@@ -36,7 +36,7 @@ import retrofit2.Response;
 
 public class ChiTietHoaDonActivity extends AppCompatActivity {
 
-    private TextView tvid, tvTen, tvDiaChi, tvNgayDat, tvsdt, tvTongTien;
+    private TextView tvid, tvTen, tvDiaChi, tvNgayDat, tvsdt, tvTongTien, tvGhiChu;
     private List<MonAnModel> mList = new ArrayList<>();
     private ListView mListView;
     private MonAnAdapter2 mAnAdapter2;
@@ -116,6 +116,8 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
         btnHuy2 = findViewById(R.id.btnHuyDon2);
         btnNhanDon = findViewById(R.id.btnNhanDon);
         btnNHanHang = findViewById(R.id.btnNhanHang);
+        imgBack = findViewById(R.id.imgBack);
+        tvGhiChu = findViewById(R.id.tvGhiChu);
     }
     private void getHoaDonById(int id){
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);
@@ -132,6 +134,12 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
                     tvTen.setText("Họ tên: "+model.getHoTen());
                     tvNgayDat.setText("Ngày đặt: "+new SimpleDateFormat("yyyy-MM-dd hh:mm").format(model.getNgayDat()));
                     tvTongTien.setText(ChiTietMonAnActivity.currencyFormat(""+model.getTongTienHoaDon())+"đ");
+                    Log.e("TAG", "onResponse: "+model.getGhiChu());
+                    if(model.getGhiChu().isEmpty()){
+                        tvGhiChu.setVisibility(View.GONE);
+                    }else{
+                        tvGhiChu.setText("Ghi chú: "+model.getGhiChu());
+                    }
                     if(trangThai.equals("Đã hoàn thành") || trangThai.equals("Hủy đơn")){
                         btnHuy1.setVisibility(View.GONE);
                         btnHuy2.setVisibility(View.GONE);

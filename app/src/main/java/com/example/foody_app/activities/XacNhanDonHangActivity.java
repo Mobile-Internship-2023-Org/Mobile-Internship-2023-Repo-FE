@@ -530,7 +530,7 @@ public class XacNhanDonHangActivity extends AppCompatActivity
         int idGioHang = sharedPreferences.getInt("idGioHang", -1);
         String diaChi = sharedPreferences.getString("diaChi", "");
         int tongTienHoaDon = sharedPreferences.getInt("tongTien", -1);
-        String comment = sharedPreferences.getString("comment", "");
+        String comment = edComment.getText().toString();
         String phuongThucTT = sharedPreferences.getString("phuongThucTT", "Thanh toán tiền mặt");
 
         APIInterface apiInterface = APIClient.getInstance().create(APIInterface.class);

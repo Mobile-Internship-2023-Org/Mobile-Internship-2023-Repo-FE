@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
                     ReplaceFragment(new GioHangFragment());
                     return true;
                 }
-                if(item.getItemId() == R.id.nav_statistical){
-                    ReplaceFragment(new ThongKeFragment());
-                    return true;
-                }
+//                if(item.getItemId() == R.id.nav_statistical){
+//                    ReplaceFragment(new ThongKeFragment());
+//                    return true;
+//                }
                 if(item.getItemId() == R.id.nav_account){
                     ReplaceFragment(new TaiKhoanFragment());
                     return true;
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     UserModel userModel = response.body();
                     Log.e("", "onResponse: "+userModel.getHoTen() );
                     if(userModel.getRole().equals("user")){
-                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
+//                        mNavigationView.getMenu().findItem(R.id.nav_statistical).setVisible(false);
                     }
                 } else {
                     Log.e("TAG", "onResponse: " + response.errorBody());

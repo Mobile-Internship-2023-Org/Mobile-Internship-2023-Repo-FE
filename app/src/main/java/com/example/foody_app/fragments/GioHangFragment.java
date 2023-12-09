@@ -115,7 +115,7 @@ public class GioHangFragment extends Fragment {
     public void updateTotalAmount() {
         long totalAmount = calculateTotal();
         TextView txtTongTien = getView().findViewById(R.id.txtTongTien);
-        txtTongTien.setText("Tổng tiền: " + ChiTietMonAnActivity.currencyFormat(totalAmount+"") + " VND");
+        txtTongTien.setText("Tổng tiền: " + ChiTietMonAnActivity.currencyFormat(totalAmount+"") + "đ");
     }
 
     private long calculateTotal() {

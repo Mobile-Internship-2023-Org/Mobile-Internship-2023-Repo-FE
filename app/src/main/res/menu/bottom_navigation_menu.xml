@@ -13,10 +13,10 @@
         android:icon="@drawable/shopping_cart"
         android:id="@+id/nav_shopping_cart"
         />
-    <item android:title="Thóng kê"
-        android:icon="@drawable/diagram"
-        android:id="@+id/nav_statistical"
-        />
+<!--    <item android:title="Thóng kê"-->
+<!--        android:icon="@drawable/diagram"-->
+<!--        android:id="@+id/nav_statistical"-->
+<!--        />-->
     <item android:title="Tài khoản"
         android:icon="@drawable/user"
         android:id="@+id/nav_account"
